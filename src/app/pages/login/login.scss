@@ -1,0 +1,189 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input-wrapper .material-icons {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 20px;
+  }
+
+  .input-field {
+    padding-left: 40px; /* เว้นช่องให้ไอคอน */
+  }
+
+        body {
+            font-family: 'Arial', sans-serif;
+             background: url('/assets/bg.png') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 4, 40, 0.7) 0%, rgba(0, 78, 146, 0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Background decorative elements */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .neon-lines {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+        }
+
+        .neon-arrow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid #4a90ff;
+            border-left: none;
+            border-bottom: none;
+            transform: rotate(45deg);
+            box-shadow: 0 0 20px rgba(74, 144, 255, 0.5);
+        }
+
+        .controller-icon {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(74, 144, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+            color: #2d5aa0;
+            opacity: 0.4;
+        }
+
+        .controller-icon2 {
+            position: absolute;
+            bottom: 20%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(74, 144, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .login-container {
+            background: rgba(169, 169, 169, 0.95);
+            border-radius: 30px;
+            padding: 50px 40px;
+            width: 420px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-image {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            background: #e8e8e8;
+            position: relative;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-login {
+            background: #001f5c;
+        }
+
+        .btn-register {
+            background: #d50000;
+        }

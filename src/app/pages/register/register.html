@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KAIGAME Register</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="register-container">
+      <div class="header-section">
+        <div class="header-title">สมัครสมาชิก</div>
+
+        <!-- <div class="profile-upload" (click)="fileInput.click()">
+          <span *ngIf="!profilePreview" id="uploadText">เลือกรูปภาพ</span>
+          <img *ngIf="profilePreview" [src]="profilePreview" alt="Profile" id="profilePreview" />
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            style="display: none"
+          />
+        </div> -->
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <span class="material-icons">person</span>
+          <input
+            type="text"
+            class="input-field"
+            placeholder="ชื่อผู้ใช้"
+            [(ngModel)]="fullname"
+            [disabled]="isLoading"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <span class="material-icons">email</span>
+          <input
+            type="email"
+            class="input-field"
+            placeholder="อีเมล"
+            [(ngModel)]="email"
+            [disabled]="isLoading"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <span class="material-icons">lock</span>
+          <input
+            type="password"
+            class="input-field"
+            placeholder="รหัสผ่าน"
+            [(ngModel)]="password"
+            [disabled]="isLoading"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <span class="material-icons">lock</span>
+          <input
+            type="password"
+            class="input-field"
+            placeholder="ยืนยันรหัสผ่าน"
+            [(ngModel)]="confirmPassword"
+            [disabled]="isLoading"
+            (keyup.enter)="register()"
+          />
+        </div>
+      </div>
+
+      <button class="btn-register" (click)="register()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">สมัครสมาชิก</span>
+        <span *ngIf="isLoading">กำลังสมัคร...</span>
+      </button>
+
+      <div class="login-link">มีบัญชีอยู่แล้ว? <a (click)="goToLogin()">เข้าสู่ระบบ</a></div>
+    </div>
+  </body>
+</html>
