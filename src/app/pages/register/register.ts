@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
+import { User } from '../../services/api/user';
 
 @Component({
   selector: 'app-register',
@@ -17,27 +18,12 @@ export class Register {
   password: string = '';
   confirmPassword: string = '';
   profileImage: string = 'default.png';
-  profilePreview: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  private apiUrl = 'https://gameshop-api-fsic.onrender.com/api/Auth/register';
+  constructor(private router: Router, private userService: User) {}
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  // onFileSelected(event: any) {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.profilePreview = e.target.result;
-  //     };
-  //     reader.readAsDataURL(file);
-  //     this.profileImage = 'default.png';
-  //   }
-  // }
-
-  register() {
+  async register() {
     this.errorMessage = '';
 
     if (!this.fullname || !this.email || !this.password || !this.confirmPassword) {
@@ -57,28 +43,23 @@ export class Register {
 
     this.isLoading = true;
 
-    const registerData = {
-      email: this.email,
-      password: this.password,
-      fullname: this.fullname,
-      profileImage: this.profileImage,
-    };
+    try {
+      const response = await this.userService.register({
+        email: this.email,
+        password: this.password,
+        fullname: this.fullname,
+        profileImage: this.profileImage,
+      });
 
-    console.log('Sending register request:', registerData);
-
-    this.http.post<any>(this.apiUrl, registerData).subscribe({
-      next: (response) => {
-        console.log('Register success:', response);
-        this.isLoading = false;
-        alert('สมัครสมาชิกสำเร็จ!');
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Register error:', error);
-        this.isLoading = false;
-        this.errorMessage = error.error?.message || 'เกิดข้อผิดพลาดในการสมัครสมาชิก';
-      },
-    });
+      console.log('Register success:', response);
+      this.isLoading = false;
+      alert('สมัครสมาชิกสำเร็จ!');
+      this.router.navigate(['']);
+    } catch (error: any) {
+      console.error('Register error:', error);
+      this.isLoading = false;
+      this.errorMessage = error.error?.message || 'เกิดข้อผิดพลาดในการสมัครสมาชิก';
+    }
   }
 
   goToLogin() {
