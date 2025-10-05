@@ -14,11 +14,11 @@ import { Constants } from '../../config/constants';
   styleUrl: './login.scss',
 })
 export class Login {
+  fullname: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
-
   constructor(private http: HttpClient, private router: Router, private constants: Constants) {}
 
   login() {

@@ -20,11 +20,11 @@
         <div class="profile-middle">
           <div class="profile-info">
             <div class="info-label">ชื่อผู้ใช้</div>
-            <div class="info-value">John Wick</div>
+            <div class="info-value">{{ user.fullname }}</div>
           </div>
           <div class="profile-info">
             <div class="info-label">อีเมล</div>
-            <div class="info-value">John.Wick@gmail.com</div>
+            <div class="info-value">{{ user.email }}</div>
           </div>
           <!-- เมื่อคลิกจะเรียก toggleEditCard() -->
           <button class="edit-profile-btn" (click)="toggleEditCard()">แก้ไขโปรไฟล์</button>

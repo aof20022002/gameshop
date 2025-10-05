@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../services/api/user';
+import { Api_Service } from '../../services/api/api_service';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,7 @@ export class Register {
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  constructor(private router: Router, private userService: User) {}
+  constructor(private router: Router, private userService: Api_Service) {}
 
   async register() {
     this.errorMessage = '';
