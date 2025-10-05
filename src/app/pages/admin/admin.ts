@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { HeaderAdmin } from '../header-admin/header-admin';
 
 @Component({
   selector: 'app-admin',
-  imports: [],
+  imports: [HeaderAdmin],
   templateUrl: './admin.html',
-  styleUrl: './admin.scss'
+  styleUrl: './admin.scss',
 })
-export class Admin {
-
-}
+export class Admin {}

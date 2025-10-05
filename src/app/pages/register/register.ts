@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
+import { Api_Service } from '../../services/api/api_service';
 
 @Component({
   selector: 'app-register',
@@ -19,39 +20,22 @@ export class Register {
   profileImage: string = 'default.png';
   errorMessage: string = '';
   isLoading: boolean = false;
-  selectedFile: File | null = null;
-  profilePreview: string | ArrayBuffer | null = null;
-  private apiUrl = 'http://localhost:5280/api/Auth/register';
+
+  private apiUrl = 'https://gameshop-api-fsic.onrender.com/api/Auth/register';
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      // ตรวจสอบประเภทไฟล์
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-      if (!allowedTypes.includes(file.type)) {
-        this.errorMessage = 'กรุณาเลือกไฟล์รูปภาพเท่านั้น (jpg, jpeg, png, gif)';
-        return;
-      }
-
-      // ตรวจสอบขนาดไฟล์ (5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        this.errorMessage = 'ขนาดไฟล์ต้องไม่เกิน 5MB';
-        return;
-      }
-
-      this.selectedFile = file;
-      this.errorMessage = '';
-
-      // อ่านไฟล์และแสดง preview
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.profilePreview = e.target.result; // Base64 string ของรูปภาพ
-      };
-      reader.readAsDataURL(file); // อ่านไฟล์เป็น Data URL
-    }
-  }
+  // onFileSelected(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.profilePreview = e.target.result;
+  //     };
+  //     reader.readAsDataURL(file);
+  //     this.profileImage = 'default.png';
+  //   }
+  // }
 
   register() {
     this.errorMessage = '';
@@ -78,25 +62,21 @@ export class Register {
 
     this.isLoading = true;
 
-    // สร้าง FormData สำหรับส่งข้อมูลพร้อมไฟล์
-    const formData = new FormData();
-    formData.append('email', this.email);
-    formData.append('password', this.password);
-    formData.append('fullname', this.fullname);
+    const registerData = {
+      email: this.email,
+      password: this.password,
+      fullname: this.fullname,
+      profileImage: this.profileImage,
+    };
 
-    // เพิ่มไฟล์ถ้ามีการเลือก
-    if (this.selectedFile) {
-      formData.append('profileImage', this.selectedFile);
-    }
+    console.log('Sending register request:', registerData);
 
-    console.log('Sending register request');
-
-    this.http.post<any>(this.apiUrl, formData).subscribe({
+    this.http.post<any>(this.apiUrl, registerData).subscribe({
       next: (response) => {
         console.log('Register success:', response);
         this.isLoading = false;
         alert('สมัครสมาชิกสำเร็จ!');
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error('Register error:', error);

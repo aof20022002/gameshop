@@ -25,6 +25,7 @@
             class="input-field"
             placeholder="อีเมล"
             [(ngModel)]="email"
+            [disabled]="isLoading"
             (keyup.enter)="login()"
           />
         </div>
@@ -38,6 +39,7 @@
             class="input-field"
             placeholder="รหัสผ่าน"
             [(ngModel)]="password"
+            [disabled]="isLoading"
             (keyup.enter)="login()"
           />
         </div>
@@ -47,7 +49,9 @@
         {{ isLoading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ' }}
       </button>
 
-      <button class="btn btn-register" (click)="goToRegister()">สมัครสมาชิก</button>
+      <button class="btn btn-register" (click)="goToRegister()" [disabled]="isLoading">
+        สมัครสมาชิก
+      </button>
     </div>
   </body>
 </html>

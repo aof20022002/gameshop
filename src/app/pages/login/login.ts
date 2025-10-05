@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { Router, RouterModule } from '@angular/router';
 
+import { Constants } from '../../config/constants';
+
 @Component({
   selector: 'app-login',
   imports: [CommonModule, RouterModule, FormsModule],
@@ -12,13 +14,12 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
+  fullname: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
-
-  private apiUrl = 'https://gameshop-api-fsic.onrender.com/api/Auth/login';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private constants: Constants) {}
 
   login() {
     if (!this.email || !this.password) {
@@ -29,10 +30,10 @@ export class Login {
     this.isLoading = true;
     this.errorMessage = '';
 
-    console.log('Attempting login with:', { email: this.email });
+    const apiUrl = `${this.constants.API_ENDPOINT}/Auth/login`;
 
     this.http
-      .post<any>(this.apiUrl, {
+      .post<any>(apiUrl, {
         email: this.email,
         password: this.password,
       })
@@ -50,7 +51,7 @@ export class Login {
           if (response.role === 'admin') {
             this.router.navigate(['/admin']);
           } else {
-            this.router.navigate(['/user']);
+            this.router.navigate(['/users']);
           }
         },
         error: (error) => {

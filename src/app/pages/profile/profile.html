@@ -1,0 +1,129 @@
+<app-header-user></app-header-user>
+
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>โปรไฟล์ - KAIGAME</title>
+  </head>
+  <body>
+    <div class="profile-container">
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-left">
+          <div class="profile-avatar">
+            <img src="https://via.placeholder.com/100" alt="Profile Picture" class="avatar-img" />
+          </div>
+        </div>
+
+        <div class="profile-middle">
+          <div class="profile-info">
+            <div class="info-label">ชื่อผู้ใช้</div>
+            <div class="info-value">{{ user.fullname }}</div>
+          </div>
+          <div class="profile-info">
+            <div class="info-label">อีเมล</div>
+            <div class="info-value">{{ user.email }}</div>
+          </div>
+          <!-- เมื่อคลิกจะเรียก toggleEditCard() -->
+          <button class="edit-profile-btn" (click)="toggleEditCard()">แก้ไขโปรไฟล์</button>
+        </div>
+
+        <div class="profile-right">
+          <div class="balance-section">
+            <div class="balance-label">กระเป๋าตัง</div>
+            <div class="balance-amount">701.99</div>
+          </div>
+          <button class="topup-btn" (click)="toggleTopupCard()">เติมเงิน</button>
+        </div>
+      </div>
+
+      <div class="history-card">
+        <div class="history-header">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          ประวัติการทำรายการ
+        </div>
+
+        <div class="transaction-list">
+          <div class="transaction-item">
+            <div class="transaction-left">
+              <div class="transaction-title">เติมเงิน</div>
+              <div class="transaction-amount">1500.00</div>
+            </div>
+            <div class="transaction-right">
+              <div class="transaction-date">26/09/2025 12.00</div>
+            </div>
+          </div>
+
+          <div class="transaction-item">
+            <div class="transaction-left">
+              <div class="transaction-title">ซื้อเกม Rust</div>
+              <div class="transaction-amount">799.00</div>
+            </div>
+            <div class="transaction-right">
+              <div class="transaction-date">26/09/2025 12.30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- ส่วนแสดง Card แก้ไข -->
+<div class="edit-card" *ngIf="showEditCard">
+  <div class="edit-card-content">
+    <h3>แก้ไขโปรไฟล์</h3>
+    <label>ชื่อผู้ใช้</label>
+    <input type="text" [(ngModel)]="user.fullname" />
+
+    <label>อีเมล</label>
+    <input type="email" [(ngModel)]="user.email" />
+
+    <div class="edit-actions">
+      <button class="save-btn" (click)="saveProfile()">บันทึก</button>
+      <button class="cancel-btn" (click)="toggleEditCard()">ยกเลิก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ส่วนแสดง Card เติมเงิน -->
+<div class="topup-card" *ngIf="showTopupCard">
+  <div class="topup-card-content">
+    <h3>เติมเงิน</h3>
+
+    <!-- ปุ่มยอดเงินด่วน -->
+    <div class="quick-amounts">
+      <button
+        *ngFor="let amount of presetAmounts"
+        (click)="selectAmount(amount)"
+        [class.active]="topupAmount === amount"
+      >
+        {{ amount }}
+      </button>
+    </div>
+
+    <!-- ช่องกรอกจำนวนเงิน -->
+    <input type="number" [(ngModel)]="topupAmount" placeholder="ใส่จำนวนเงิน" class="topup-input" />
+
+    <!-- ปุ่มยืนยัน / ยกเลิก -->
+    <div class="topup-actions">
+      <button class="confirm-btn" (click)="confirmTopup()">เติมเงิน</button>
+      <button class="cancel-btn" (click)="toggleTopupCard()">ยกเลิก</button>
+    </div>
+  </div>
+</div>
