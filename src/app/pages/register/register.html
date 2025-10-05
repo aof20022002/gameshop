@@ -11,9 +11,22 @@
       <div class="header-section">
         <div class="header-title">สมัครสมาชิก</div>
 
-        <!-- <div class="profile-upload" (click)="fileInput.click()">
-          <span *ngIf="!profilePreview" id="uploadText">เลือกรูปภาพ</span>
-          <img *ngIf="profilePreview" [src]="profilePreview" alt="Profile" id="profilePreview" />
+        <div class="profile-upload" (click)="fileInput.click()">
+          <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
+          <div *ngIf="!profilePreview" class="upload-placeholder">
+            <i class="fa fa-camera"></i>
+            <p>เลือกรูปภาพ</p>
+          </div>
+
+          <!-- แสดงรูปที่เลือก -->
+          <img
+            *ngIf="profilePreview"
+            [src]="profilePreview"
+            alt="Profile Preview"
+            class="profile-preview-image"
+          />
+
+          <!-- Input file ซ่อนไว้ -->
           <input
             #fileInput
             type="file"
@@ -21,7 +34,7 @@
             (change)="onFileSelected($event)"
             style="display: none"
           />
-        </div> -->
+        </div>
       </div>
 
       <div *ngIf="errorMessage" class="error-message">
