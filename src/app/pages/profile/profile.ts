@@ -10,25 +10,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })
-export class Profile implements OnInit {
+export class Profile {
   showEditCard = false;
   showTopupCard = false;
   topupAmount: number | null = null;
   presetAmounts = [100, 200, 500];
-  user = {
-    fullname: '',
-    email: '',
-  };
 
-  ngOnInit() {
-    // ดึงข้อมูลผู้ใช้จาก localStorage
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      const userObj = JSON.parse(userData);
-      this.user.fullname = userObj.fullname || '';
-      this.user.email = userObj.email || '';
-    }
-  }
   //funtion Card เติมเงิน
   toggleTopupCard() {
     this.showTopupCard = !this.showTopupCard;
@@ -51,10 +38,5 @@ export class Profile implements OnInit {
   //funtion Card แก้ไขโปรไฟล์
   toggleEditCard() {
     this.showEditCard = !this.showEditCard;
-  }
-
-  saveProfile() {
-    alert(`ข้อมูลใหม่ถูกบันทึก: ${this.user.fullname}, ${this.user.email}`);
-    this.toggleEditCard();
   }
 }

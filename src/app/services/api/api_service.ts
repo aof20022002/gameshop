@@ -11,24 +11,4 @@ import { UserResponse } from '../../model/responses/user_get_res';
 })
 export class Api_Service {
   constructor(private constants: Constants, private http: HttpClient) {}
-
-  // public async getUser(uid: number): Promise<UserResponse> {
-  //   const url = `${this.constants.API_ENDPOINT}User/user/${uid}`;
-  //   const response = await lastValueFrom(this.http.get<UserResponse>(url));
-  //   return response;
-  // }
-
-  // method login
-  public async login(email: string, password: string) {
-    const url = this.constants.API_ENDPOINT + '/Auth/login';
-    const response = await lastValueFrom(this.http.post(url, { email, password }));
-    return response as UserResponse;
-  }
-
-  // method register
-  public async register(data: RegisterRequest) {
-    const url = this.constants.API_ENDPOINT + '/Auth/register';
-    const response = await lastValueFrom(this.http.post(url, data));
-    return response as RegisterResponse;
-  }
 }
