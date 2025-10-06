@@ -11,23 +11,36 @@
       <div class="logo-section">
         <img src="assets/logo.png" alt="KAIGAME Logo" class="logo-image" />
       </div>
-
-      <div class="input-group">
-        <div class="input-wrapper">
-          <span class="material-icons">email</span>
-          <input type="email" class="input-field" placeholder="อีเมล" />
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <div class="input-group">
+          <div class="input-wrapper">
+            <span class="material-icons">email</span>
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              required
+              class="input-field"
+              placeholder="อีเมล"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="input-group">
-        <div class="input-wrapper">
-          <span class="material-icons">lock</span>
-          <input type="password" class="input-field" placeholder="รหัสผ่าน" />
+        <div class="input-group">
+          <div class="input-wrapper">
+            <span class="material-icons">lock</span>
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              required
+              class="input-field"
+              placeholder="รหัสผ่าน"
+            />
+          </div>
         </div>
-      </div>
-
-      <button class="btn btn-login">เข้าสู่ระบบ</button>
-
+        <button class="btn btn-login" type="submit">เข้าสู่ระบบ</button>
+      </form>
       <button class="btn btn-register">สมัครสมาชิก</button>
     </div>
   </body>
