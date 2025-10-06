@@ -12,46 +12,23 @@
         <img src="assets/logo.png" alt="KAIGAME Logo" class="logo-image" />
       </div>
 
-      <!-- แสดง error message -->
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">email</span>
-          <input
-            type="email"
-            class="input-field"
-            placeholder="อีเมล"
-            [(ngModel)]="email"
-            [disabled]="isLoading"
-            (keyup.enter)="login()"
-          />
+          <input type="email" class="input-field" placeholder="อีเมล" />
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">lock</span>
-          <input
-            type="password"
-            class="input-field"
-            placeholder="รหัสผ่าน"
-            [(ngModel)]="password"
-            [disabled]="isLoading"
-            (keyup.enter)="login()"
-          />
+          <input type="password" class="input-field" placeholder="รหัสผ่าน" />
         </div>
       </div>
 
-      <button class="btn btn-login" (click)="login()" [disabled]="isLoading">
-        {{ isLoading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ' }}
-      </button>
+      <button class="btn btn-login">เข้าสู่ระบบ</button>
 
-      <button class="btn btn-register" (click)="goToRegister()" [disabled]="isLoading">
-        สมัครสมาชิก
-      </button>
+      <button class="btn btn-register">สมัครสมาชิก</button>
     </div>
   </body>
 </html>

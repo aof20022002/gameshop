@@ -39,4 +39,9 @@ export class Profile {
   toggleEditCard() {
     this.showEditCard = !this.showEditCard;
   }
+
+  saveProfile() {
+    alert('บันทึกข้อมูลสำเร็จ');
+    this.toggleEditCard();
+  }
 }

@@ -20,11 +20,11 @@
         <div class="profile-middle">
           <div class="profile-info">
             <div class="info-label">ชื่อผู้ใช้</div>
-            <div class="info-value">{{ user.fullname }}</div>
+            <div class="info-value">กกกกกกก</div>
           </div>
           <div class="profile-info">
             <div class="info-label">อีเมล</div>
-            <div class="info-value">{{ user.email }}</div>
+            <div class="info-value">สมชาย</div>
           </div>
           <!-- เมื่อคลิกจะเรียก toggleEditCard() -->
           <button class="edit-profile-btn" (click)="toggleEditCard()">แก้ไขโปรไฟล์</button>
@@ -89,10 +89,10 @@
   <div class="edit-card-content">
     <h3>แก้ไขโปรไฟล์</h3>
     <label>ชื่อผู้ใช้</label>
-    <input type="text" [(ngModel)]="user.fullname" />
+    <input type="text" />
 
     <label>อีเมล</label>
-    <input type="email" [(ngModel)]="user.email" />
+    <input type="email" />
 
     <div class="edit-actions">
       <button class="save-btn" (click)="saveProfile()">บันทึก</button>

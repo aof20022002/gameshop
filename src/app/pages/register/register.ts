@@ -13,9 +13,13 @@ import { Api_Service } from '../../services/api/api_service';
   styleUrl: './register.scss',
 })
 export class Register {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private api: Api_Service) {}
 
   goToLogin() {
     this.router.navigate(['']);
   }
+
+  onFileSelected(event: any) {}
+
+  async register() {}
 }
