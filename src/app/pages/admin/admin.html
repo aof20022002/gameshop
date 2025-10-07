@@ -9,26 +9,28 @@
   </head>
   <body>
     <!-- Main Content -->
-    <main>
-      <!-- Search Section -->
+    <main style="background-color: #242424">
       <div class="search-section">
         <div class="category-select">
-          <select id="categoryFilter">
-            <option>ประเภท</option>
-            <option>เอาชีวิตรอด</option>
-            <option>แอคชั่น</option>
-            <option>ผจญภัย</option>
-            <option>กีฬา</option>
-            <option>RPG</option>
+          <select [(ngModel)]="selectedCategory" (change)="filterGames()">
+            <option value="">ประเภททั้งหมด</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
           </select>
           <span class="material-icons">expand_more</span>
         </div>
-        <input type="text" class="search-input" placeholder="ค้นหาจากชื่อ..." id="searchInput" />
-        <button class="search-btn" onclick="searchGames()">ค้นหา</button>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="ค้นหาจากชื่อ..."
+          [(ngModel)]="searchText"
+        />
+        <button class="search-btn" (click)="searchGames()">ค้นหา</button>
       </div>
 
+      <!-- รายการเกม -->
       <div class="game-list" id="gameList">
-        <div class="game-card" *ngFor="let game of games">
+        <div class="game-card" *ngFor="let game of filteredGames">
           <img
             [src]="game.image_url || 'https://via.placeholder.com/140/1a1a2e/ffffff?text=NOIMAGE'"
             [alt]="game.title"
@@ -51,117 +53,18 @@
           <div class="game-price-section">
             <div class="game-price">฿{{ game.price }}</div>
             <div class="game-actions">
-              <button class="btn-edit">
-                <span class="material-icons">edit</span>
-                แก้ไข
+              <button class="btn-edit" [routerLink]="['/edit-game', game.game_id]">
+                <span class="material-icons">edit</span>แก้ไข
               </button>
-              <button class="btn-delete">
-                <span class="material-icons">delete</span>
-                ลบ
-              </button>
+              <button class="btn-delete"><span class="material-icons">delete</span>ลบ</button>
             </div>
           </div>
         </div>
       </div>
       <!-- Add Button -->
       <button class="btn-add-float">
-        <span class="material-icons">add</span>
+        <span class="material-icons" routerLink="/add-game">add</span>
       </button>
     </main>
-
-    <!-- Add Game Modal -->
-    <div class="modal-overlay" id="addModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button class="btn-back">
-            <span class="material-icons" style="font-size: 2rem">arrow_back</span>
-          </button>
-          <h2 class="modal-title">เพิ่มเกม</h2>
-        </div>
-
-        <form>
-          <div class="form-group">
-            <div class="image-upload">
-              <input type="file" accept="image/*" onchange="previewImage(event, 'addPreview')" />
-              <span id="addPreview">เลือกรูปภาพ</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-input" placeholder="ชื่อเกม" required />
-          </div>
-
-          <div class="form-group">
-            <textarea
-              class="form-textarea"
-              rows="4"
-              placeholder="รายละเอียดเกม"
-              required
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <input type="number" class="form-input" placeholder="ราคา" required />
-          </div>
-
-          <div class="form-group">
-            <input type="number" class="form-input" placeholder="จำนวนสินค้า" required />
-          </div>
-
-          <div class="form-group">
-            <select class="form-select" required>
-              <option value="">ประเภทของเกม</option>
-              <option>เอาชีวิตรอด</option>
-              <option>แอคชั่น</option>
-              <option>ผจญภัย</option>
-              <option>กีฬา</option>
-              <option>RPG</option>
-            </select>
-          </div>
-
-          <button type="submit" class="btn-submit">เพิ่มเกม</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Edit Game Modal -->
-    <div class="modal-overlay" id="editModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button class="btn-back">
-            <span class="material-icons" style="font-size: 2rem">arrow_back</span>
-          </button>
-          <h2 class="modal-title">แก้ไขเกม</h2>
-        </div>
-
-        <div class="image-preview">
-          <img src="https://via.placeholder.com/180/1a1a2e/ffffff?text=RUST" alt="Game" />
-        </div>
-
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-input" value="Rust" required />
-          </div>
-
-          <div class="form-group">
-            <textarea class="form-textarea" rows="4" required>
-SCUM คือเกมเอาตัวรอดแนวโลกเปิดที่ทั้งโหดร้ายและสมจริงที่สดที่กำเนิมุ่งมุมของการเอาชีวิตรอดถูกอออกแบบมาอย่างละเอียดสุดๆ</textarea
-            >
-          </div>
-
-          <div class="form-group">
-            <select class="form-select" required>
-              <option selected>เอาชีวิตรอด</option>
-              <option>แอคชั่น</option>
-              <option>ผจญภัย</option>
-              <option>กีฬา</option>
-              <option>RPG</option>
-            </select>
-          </div>
-
-          <button type="submit" class="btn-submit">แก้ไขเกม</button>
-        </form>
-      </div>
-    </div>
   </body>
 </html>
