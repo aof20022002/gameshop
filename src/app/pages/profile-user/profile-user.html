@@ -13,18 +13,22 @@
       <div class="profile-card">
         <div class="profile-left">
           <div class="profile-avatar">
-            <img src="https://via.placeholder.com/100" alt="Profile Picture" class="avatar-img" />
+            <img
+              [src]="User?.profile_image || 'https://via.placeholder.com/100'"
+              alt="Profile Picture"
+              class="avatar-img"
+            />
           </div>
         </div>
 
         <div class="profile-middle">
           <div class="profile-info">
             <div class="info-label">ชื่อผู้ใช้</div>
-            <div class="info-value">กกกกกกก</div>
+            <div class="info-value">{{ User?.fullname }}</div>
           </div>
           <div class="profile-info">
             <div class="info-label">อีเมล</div>
-            <div class="info-value">สมชาย</div>
+            <div class="info-value">{{ User?.email }}</div>
           </div>
           <!-- เมื่อคลิกจะเรียก toggleEditCard() -->
           <button class="edit-profile-btn" (click)="toggleEditCard()">แก้ไขโปรไฟล์</button>

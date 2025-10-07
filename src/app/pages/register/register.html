@@ -11,49 +11,71 @@
       <div class="header-section">
         <div class="header-title">สมัครสมาชิก</div>
 
-        <div class="profile-upload" (click)="fileInput.click()">
-          <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
+        <div class="profile-upload-container">
+          <div class="profile-upload" (click)="fileInput.click()">
+            <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
+            <div *ngIf="!profilePreview" class="upload-placeholder">
+              <i class="fa fa-camera"></i>
+              <p>เลือกรูปภาพ</p>
+            </div>
 
-          <!-- แสดงรูปที่เลือก -->
+            <!-- แสดงรูปที่เลือก -->
+            <img
+              *ngIf="profilePreview"
+              [src]="profilePreview"
+              alt="Profile Preview"
+              class="profile-preview-image"
+            />
 
-          <!-- Input file ซ่อนไว้ -->
-          <input
-            #fileInput
-            type="file"
-            accept="image/*"
-            (change)="onFileSelected($event)"
-            style="display: none"
-          />
+            <!-- Input file ซ่อนไว้ -->
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              style="display: none"
+            />
+          </div>
         </div>
       </div>
-
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">person</span>
-          <input type="text" class="input-field" placeholder="ชื่อผู้ใช้" />
+          <input type="text" class="input-field" placeholder="ชื่อผู้ใช้" [(ngModel)]="fullname" />
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">email</span>
-          <input type="email" class="input-field" placeholder="อีเมล" />
+          <input type="email" class="input-field" placeholder="อีเมล" [(ngModel)]="email" />
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">lock</span>
-          <input type="password" class="input-field" placeholder="รหัสผ่าน" />
+          <input
+            type="password"
+            class="input-field"
+            placeholder="รหัสผ่าน"
+            [(ngModel)]="password"
+          />
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">lock</span>
-          <input type="password" class="input-field" placeholder="ยืนยันรหัสผ่าน" />
+          <input
+            type="password"
+            class="input-field"
+            placeholder="ยืนยันรหัสผ่าน"
+            [(ngModel)]="confirmPassword"
+          />
         </div>
       </div>
+      <button class="btn btn-register" (click)="register()">สมัครสมาชิก</button>
 
       <div class="login-link">มีบัญชีอยู่แล้ว? <a (click)="goToLogin()">เข้าสู่ระบบ</a></div>
     </div>
