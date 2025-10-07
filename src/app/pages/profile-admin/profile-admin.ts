@@ -1,0 +1,47 @@
+import { Component } from '@angular/core';
+import { HeaderAdmin } from '../header-admin/header-admin';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-profile-admin',
+  imports: [HeaderAdmin, CommonModule, RouterModule, FormsModule],
+  templateUrl: './profile-admin.html',
+  styleUrl: './profile-admin.scss',
+})
+export class ProfileAdmin {
+  showEditCard = false;
+  showTopupCard = false;
+  topupAmount: number | null = null;
+  presetAmounts = [100, 200, 500];
+
+  //funtion Card เติมเงิน
+  toggleTopupCard() {
+    this.showTopupCard = !this.showTopupCard;
+  }
+
+  selectAmount(amount: number) {
+    this.topupAmount = amount;
+  }
+
+  confirmTopup() {
+    if (!this.topupAmount || this.topupAmount <= 0) {
+      alert('กรุณาใส่จำนวนเงินที่ถูกต้อง');
+      return;
+    }
+    alert(`เติมเงินสำเร็จ ${this.topupAmount} บาท`);
+    this.toggleTopupCard();
+    this.topupAmount = null;
+  }
+
+  //funtion Card แก้ไขโปรไฟล์
+  toggleEditCard() {
+    this.showEditCard = !this.showEditCard;
+  }
+
+  saveProfile() {
+    alert('บันทึกข้อมูลสำเร็จ');
+    this.toggleEditCard();
+  }
+}

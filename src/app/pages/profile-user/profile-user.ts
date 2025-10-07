@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HeaderUser } from '../header-user/header-user';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profile-user',
   imports: [HeaderUser, CommonModule, RouterModule, FormsModule],
-  templateUrl: './profile.html',
-  styleUrl: './profile.scss',
+  templateUrl: './profile-user.html',
+  styleUrl: './profile-user.scss',
 })
-export class Profile {
+export class ProfileUser {
   showEditCard = false;
   showTopupCard = false;
   topupAmount: number | null = null;
