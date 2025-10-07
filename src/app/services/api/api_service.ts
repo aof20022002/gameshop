@@ -4,6 +4,8 @@ import { Constants } from '../../config/constants';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Game } from '../../model/responses/game_get_res';
 import { G } from '@angular/cdk/keycodes';
+import { RegisterRequest } from '../../model/requests/register_get_req';
+import { User } from '../../model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +24,21 @@ export class Api_Service {
     const url = this.constants.API_ENDPOINT + '/Game';
     const response = await lastValueFrom(this.http.get(url));
     return response as Game[];
+  }
+
+  public async register(formData: FormData): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Auth/Register`;
+    try {
+      const response = await lastValueFrom(this.http.post(url, formData));
+      return response;
+    } catch (error) {
+      console.error('Register failed:', error);
+      throw error;
+    }
+  }
+  public async getUserById(uid: number) {
+    const url = this.constants.API_ENDPOINT + '/User/' + uid;
+    const response = await lastValueFrom(this.http.get<User>(url));
+    return response;
   }
 }
