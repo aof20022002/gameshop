@@ -8,15 +8,36 @@
       </div>
 
       <form class="game-form">
-        <div class="image-upload-container">
-          <div class="image-placeholder">เลือกรูปภาพ</div>
-          <input
-            type="file"
-            id="game-image"
-            name="game-image"
-            accept="image/*"
-            class="visually-hidden"
-          />
+        <div class="profile-upload-container" style="margin-bottom: 20px; justify-content: center">
+          <div class="profile-upload" (click)="fileInput.click()">
+            <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
+            <div *ngIf="!profilePreview" class="upload-placeholder">
+              <span class="material-icons">add_a_photo</span>
+              <p>เลือกรูปโปรไฟล์</p>
+            </div>
+
+            <!-- แสดงรูปที่เลือก -->
+            <img
+              *ngIf="profilePreview"
+              [src]="profilePreview"
+              alt="Profile Preview"
+              class="profile-preview-image"
+            />
+
+            <!-- Badge แสดงว่าสามารถเปลี่ยนรูปได้ -->
+            <div *ngIf="profilePreview" class="edit-badge">
+              <span class="material-icons">edit</span>
+            </div>
+
+            <!-- Input file ซ่อนไว้ -->
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              style="display: none"
+            />
+          </div>
         </div>
 
         <div class="input-group">
@@ -37,11 +58,9 @@
 
         <div class="input-group select-group">
           <label for="game-type" class="visually-hidden">ประเภทของเกม</label>
-          <select id="game-type" name="game-type" required>
-            <option value="" disabled selected>ประเภทของเกม</option>
-            <option value="action">แอ็คชั่น</option>
-            <option value="rpg">สวมบทบาท (RPG)</option>
-            <option value="strategy">กลยุทธ์</option>
+          <select name="gameType" [(ngModel)]="selectedCategory" (change)="getTypegmae()">
+            <option value="">ประเภททั้งหมด</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
           </select>
           <span class="select-arrow">&#9662;</span>
         </div>
