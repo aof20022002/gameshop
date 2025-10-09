@@ -4,6 +4,7 @@ export interface Game {
   rank: number;
   category: string;
   price: number;
-  release_date: Date;
+  release_date: string;
   image_url: string;
+  detail: string;
 }
