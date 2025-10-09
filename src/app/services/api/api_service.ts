@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../config/constants';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Game } from '../../model/responses/game_get_res';
-import { G } from '@angular/cdk/keycodes';
-import { RegisterRequest } from '../../model/requests/register_get_req';
+
 import { User } from '../../model/User';
 
 @Injectable({
@@ -19,9 +18,9 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.post(url, body));
     return response;
   }
-
+  //รออโยอัพ
   public async getAllGames(options?: any) {
-    const url = this.constants.API_ENDPOINT + '/Game';
+    const url = this.constants.API_ENDPOINT + '/Games';
     const response = await lastValueFrom(this.http.get(url));
     return response as Game[];
   }
@@ -40,5 +39,45 @@ export class Api_Service {
     const url = this.constants.API_ENDPOINT + '/User/' + uid;
     const response = await lastValueFrom(this.http.get<User>(url));
     return response;
+  }
+
+  //รออโยอัพ
+  public async getGameById(gameId: number) {
+    const url = this.constants.API_ENDPOINT + '/Games/' + gameId;
+    const response = await lastValueFrom(this.http.get<Game>(url));
+    return response;
+  }
+  //รออโยอัพ
+  public async addgame(formData: FormData): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/AddGame`;
+    try {
+      const response = await lastValueFrom(this.http.post(url, formData));
+      return response;
+    } catch (error) {
+      console.error('AddGame failed:', error);
+      throw error;
+    }
+  }
+  //รออโยอัพ
+  public async updateGame(gameId: number, formData: FormData): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
+    try {
+      const response = await lastValueFrom(this.http.put(url, formData));
+      return response;
+    } catch (error) {
+      console.error('Update game failed:', error);
+      throw error;
+    }
+  }
+  //รออโยอัพ
+  public async deleteGame(gameId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
+    try {
+      const response = await lastValueFrom(this.http.delete(url));
+      return response;
+    } catch (error) {
+      console.error('Delete game failed:', error);
+      throw error;
+    }
   }
 }
