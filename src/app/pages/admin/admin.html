@@ -53,10 +53,13 @@
           <div class="game-price-section">
             <div class="game-price">฿{{ game.price }}</div>
             <div class="game-actions">
-              <button class="btn-edit" [routerLink]="['/edit-game', game.game_id]">
+              <button class="btn-edit" [routerLink]="['/edit-game', game.game_Id]">
                 <span class="material-icons">edit</span>แก้ไข
               </button>
-              <button class="btn-delete"><span class="material-icons">delete</span>ลบ</button>
+
+              <button type="button" class="btn-delete" (click)="deleteGame(game.game_Id)">
+                <span class="material-icons">delete</span> ลบ
+              </button>
             </div>
           </div>
         </div>

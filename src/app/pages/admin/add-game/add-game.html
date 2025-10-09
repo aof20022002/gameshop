@@ -7,29 +7,25 @@
         <h1 class="title" style="color: aliceblue">เพิ่มเกม</h1>
       </div>
 
-      <form class="game-form">
+      <form (submit)="onSubmit()" enctype="multipart/form-data" class="game-form">
+        <!-- อัปโหลดรูป -->
         <div class="profile-upload-container" style="margin-bottom: 20px; justify-content: center">
           <div class="profile-upload" (click)="fileInput.click()">
-            <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
             <div *ngIf="!profilePreview" class="upload-placeholder">
               <span class="material-icons">add_a_photo</span>
-              <p>เลือกรูปโปรไฟล์</p>
+              <p>เลือกรูปภาพเกม</p>
             </div>
 
-            <!-- แสดงรูปที่เลือก -->
             <img
               *ngIf="profilePreview"
               [src]="profilePreview"
               alt="Profile Preview"
               class="profile-preview-image"
             />
-
-            <!-- Badge แสดงว่าสามารถเปลี่ยนรูปได้ -->
             <div *ngIf="profilePreview" class="edit-badge">
               <span class="material-icons">edit</span>
             </div>
 
-            <!-- Input file ซ่อนไว้ -->
             <input
               #fileInput
               type="file"
@@ -40,31 +36,44 @@
           </div>
         </div>
 
+        <!-- ชื่อเกม -->
         <div class="input-group">
-          <label for="game-name" class="visually-hidden">ชื่อเกม</label>
-          <input type="text" id="game-name" name="game-name" placeholder="ชื่อเกม" required />
+          <input type="text" [(ngModel)]="title" name="title" placeholder="ชื่อเกม" required />
         </div>
 
+        <!-- รายละเอียด -->
         <div class="input-group">
-          <label for="game-details" class="visually-hidden">รายละเอียดเกม</label>
           <textarea
-            id="game-details"
-            name="game-details"
+            [(ngModel)]="detail"
+            name="detail"
             placeholder="รายละเอียดเกม"
             rows="4"
             required
           ></textarea>
         </div>
 
+        <!-- ประเภทเกม -->
         <div class="input-group select-group">
-          <label for="game-type" class="visually-hidden">ประเภทของเกม</label>
-          <select name="gameType" [(ngModel)]="selectedCategory" (change)="getTypegmae()">
-            <option value="">ประเภททั้งหมด</option>
+          <select [(ngModel)]="category" name="category" required>
+            <option value="">เลือกประเภทเกม</option>
             <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
           </select>
           <span class="select-arrow">&#9662;</span>
         </div>
 
+        <!-- ราคา -->
+        <div class="input-group">
+          <input
+            type="number"
+            [(ngModel)]="price"
+            name="price"
+            placeholder="ราคา (บาท)"
+            required
+            min="0"
+          />
+        </div>
+
+        <!-- ปุ่มเพิ่มเกม -->
         <button type="submit" class="submit-button">เพิ่มเกม</button>
       </form>
     </div>

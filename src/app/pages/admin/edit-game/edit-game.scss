@@ -1,5 +1,4 @@
 /* Overall Page Container */
-
 body {
   margin: 0;
   font-family: 'Poppins', Arial, sans-serif;
@@ -7,8 +6,201 @@ body {
   color: rgb(223, 0, 0);
   min-height: 100vh;
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main Content Area */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* Card Styling */
+.card {
+  background: rgba(13, 26, 60, 0.8);
+  border-radius: 20px;
+  padding: 20px 30px 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.back-arrow {
+  color: white;
+  text-decoration: none;
+  font-size: 28px;
+  margin-right: 20px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ffdf00;
+  }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 auto;
+  padding-right: 20px;
+}
+
+/* Profile Upload Container - กลาง Card */
+.profile-upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-upload {
+  width: 150px;
+  height: 150px;
+  border: 3px dashed rgba(255, 223, 0, 0.5);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    border-color: #ffdf00;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 223, 0, 0.4);
+  }
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: #ffdf00;
+  pointer-events: none;
+
+  .material-icons {
+    font-size: 48px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* รูปที่แสดง */
+.profile-preview-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  border-radius: 12px;
+}
+
+/* Edit Badge */
+.edit-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  .material-icons {
+    font-size: 20px;
+    color: #ffffff;
+  }
+}
+
+/* Form Styling */
+.game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group,
+.select-group {
+  position: relative;
+  width: 100%;
+}
+
+/* Input and Textarea Styling */
+.game-form input[type="text"],
+.game-form input[type="number"],
+.game-form input[type="date"],
+.game-form textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(255, 223, 0, 0.3);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Date Input Styling */
+input[type="date"] {
+  color-scheme: dark;
+  
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+}
+
 /* Select Box Styling */
-.select-group select {
+.select-group {
+  select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -16,248 +208,120 @@ body {
     padding: 15px 40px 15px 20px;
     border: none;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.15); /* พื้นหลังเข้มสว่างขึ้นเล็กน้อย */
-    color: #ffdf00; /* สีตัวหนังสือเด่น (ทอง) */
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffdf00;
     font-size: 16px;
-    font-weight: 600; /* ตัวหนาอ่านง่าย */
+    font-weight: 600;
     cursor: pointer;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
-}
 
-/* ตัวหนังสือเมื่อ hover */
-.select-group select:hover {
-    color: #ffffff; /* สีขาวชัดเมื่อ hover */
-}
+    &:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
-/* ตัวหนังสือเมื่อ focus / เลือก */
-.select-group select:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #ff6600; /* สีตัวหนังสือเด่นเมื่อเลือก (ส้ม) */
-    font-weight: bold;
-}
+    &:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.25);
+      color: #ff6600;
+      font-weight: bold;
+      box-shadow: 0 0 0 2px rgba(255, 223, 0, 0.3);
+    }
 
-/* ลูกศร */
-.select-group .select-arrow {
+    option {
+      background-color: #0d1a3c;
+      color: white;
+      padding: 10px;
+    }
+  }
+
+  .select-arrow {
     position: absolute;
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
     pointer-events: none;
     font-size: 18px;
-    color: #ffdf00; /* ลูกศรสีทองเข้ากับตัวหนังสือ */
-}
-
-.card {
-    background: rgba(13, 26, 60, 0.8); /* ทำ card โปร่งเล็กน้อย */
-    border-radius: 20px;
-    padding: 20px 30px 40px;
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    box-sizing: border-box;
-    backdrop-filter: blur(8px); /* เพิ่มความสวยล้ำแบบ glass effect */
-}
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* Top Navigation Bar */
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0d1a3c; /* Dark navy background for the nav */
-    padding: 15px 40px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.nav-logo img {
-    height: 40px; /* Adjust as needed for your logo */
-}
-
-.nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 30px; /* Space between nav items */
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    font-weight: bold;
-    transition: color 0.2s;
-}
-
-.nav-links li a:hover {
-    color: #cccccc;
-}
-
-/* Main Content Area to center the card */
-.main-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align card to the top part of the content area */
-    padding: 40px 20px; /* Padding around the card */
-}
-
-/* Card Styling (the previously 'add-game-page' styles are now for '.card') */
-.card {
-    background-color: #0d1a3c; /* Dark navy background for the card */
-    border-radius: 20px; /* Rounded corners for the card */
-    padding: 20px 30px 40px; /* Padding inside the card */
-    width: 100%;
-    max-width: 450px; /* Max width for the card to prevent it from being too wide */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Shadow for depth */
-    box-sizing: border-box;
-}
-
-/* Header Styling (Inside the Card) */
-.header {
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-    margin-bottom: 20px;
-}
-
-.back-arrow {
-    color: white;
-    text-decoration: none;
-    font-size: 28px;
-    margin-right: 20px;
-}
-
-.title {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 0 auto; /* Center the title */
-    padding-right: 20px; /* Offset for the back arrow */
-}
-
-/* Image Upload Container */
-.image-upload-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.image-placeholder {
-    width: 150px;
-    height: 150px;
-    background-color: #ffffff; /* White background for the placeholder */
-    color: #333;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Form Styling */
-.game-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Space between form fields */
-}
-
-.input-group,
-.select-group {
-    position: relative;
-    width: 100%;
-}
-
-/* Input and Textarea Styling */
-.game-form input[type="text"],
-.game-form textarea {
-    width: 100%;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter background for contrast */
-    color: white;
-    font-size: 16px;
-    box-sizing: border-box;
-    resize: none; /* Prevent manual resizing of textarea */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.game-form input::placeholder,
-.game-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Select Box Styling */
-.game-form select {
-    appearance: none; /* Remove default arrow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 100%;
-    padding: 15px 40px 15px 20px; /* Extra padding for the custom arrow */
-    border: none;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 16px;
-    box-sizing: border-box;
-    cursor: pointer;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.game-form select:focus {
-    outline: none;
-}
-
-/* Custom Select Arrow */
-.select-arrow {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    color: white;
-    pointer-events: none; /* Allows clicks to go through to the select element */
+    color: #ffdf00;
+  }
 }
 
 /* Submit Button Styling */
 .submit-button {
-    width: 100%;
-    padding: 18px 20px;
-    background-color: #cc0000; /* Red color for the button */
-    color: white;
-    border: none;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px; /* Space above the button */
-    box-shadow: 0 6px 10px rgba(204, 0, 0, 0.5);
-    transition: background-color 0.2s;
+  width: 100%;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #cc0000 0%, #aa0000 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 6px 15px rgba(204, 0, 0, 0.5);
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #dd0000 0%, #bb0000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(204, 0, 0, 0.6);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
 }
 
-.submit-button:hover {
-    background-color: #aa0000;
-}
-
-/* Utility Class for Hiding Labels but keeping them for Accessibility */
+/* Utility Class */
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
+/* Responsive Design */
+@media (max-width: 576px) {
+  .card {
+    margin: 20px;
+    padding: 20px;
+  }
 
+  .header {
+    padding: 15px 0;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .profile-upload {
+    width: 130px;
+    height: 130px;
+  }
+
+  .game-form input[type="text"],
+  .game-form input[type="number"],
+  .game-form input[type="date"],
+  .game-form textarea,
+  .select-group select {
+    font-size: 14px;
+    padding: 12px 18px;
+  }
+
+  .submit-button {
+    padding: 15px;
+    font-size: 16px;
+  }
+}

@@ -1,2 +1,79 @@
 <app-header-user></app-header-user>
-<p>users works!</p>
+
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KAIGAME Admin - จัดการเกม</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Main Content -->
+    <main style="background-color: #242424">
+      <div class="search-section">
+        <div class="category-select">
+          <select [(ngModel)]="selectedCategory" (change)="filterGames()">
+            <option value="">ประเภททั้งหมด</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+          <span class="material-icons">expand_more</span>
+        </div>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="ค้นหาจากชื่อ..."
+          [(ngModel)]="searchText"
+        />
+        <button class="search-btn" (click)="searchGames()">ค้นหา</button>
+      </div>
+
+      <!-- รายการเกม -->
+      <div class="game-list" id="gameList">
+        <div
+          class="game-card"
+          *ngFor="let game of filteredGames"
+          (click)="goToGameDetail(game.game_Id)"
+          style="cursor: pointer"
+        >
+          <img
+            [src]="game.image_url || 'https://via.placeholder.com/140/1a1a2e/ffffff?text=NOIMAGE'"
+            [alt]="game.title"
+            class="game-image"
+          />
+          <div class="game-info">
+            <h3 class="game-title">{{ game.title }}</h3>
+            <div class="game-details">
+              <div>
+                ลำดับ<span>{{ game.rank }}</span>
+              </div>
+              <div>
+                ประเภท<span>{{ game.category }}</span>
+              </div>
+              <div>
+                วางจำหน่ายเมื่อ<span>{{ game.release_date | date : 'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="game-price-section">
+            <div class="game-price">฿{{ game.price }}</div>
+            <div class="game-actions">
+              <button
+                type="button"
+                class="btn-delete"
+                (click)="detailGame(game.game_Id); $event.stopPropagation()"
+              >
+                <span class="material-icons">shopping_cart</span> เพิ่มลงตะกร้า
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <button class="btn-add-float" routerLink="/cart-game">
+      <span class="material-icons">shopping_cart</span>
+    </button>
+  </body>
+</html>

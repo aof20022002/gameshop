@@ -1,52 +1,79 @@
-<app-header-admin> </app-header-admin>
+<app-header-admin></app-header-admin>
+
 <div class="page-container">
   <div class="main-content" style="background-color: #242424">
     <div class="card">
       <div class="header">
-        <a href="#" class="back-arrow" routerLink="/admin">&#8592;</a>
+        <a class="back-arrow" [routerLink]="['/admin']">&#8592;</a>
         <h1 class="title" style="color: aliceblue">แก้ไขเกม</h1>
       </div>
 
-      <form class="game-form">
-        <div class="image-upload-container">
-          <div class="image-placeholder">เลือกรูปภาพ</div>
-          <input
-            type="file"
-            id="game-image"
-            name="game-image"
-            accept="image/*"
-            class="visually-hidden"
-          />
+      <form (submit)="onSubmit()" enctype="multipart/form-data" class="game-form">
+        <!-- อัปโหลดรูป -->
+        <div class="profile-upload-container" style="margin-bottom: 20px; justify-content: center">
+          <div class="profile-upload" (click)="fileInput.click()">
+            <div *ngIf="!profilePreview" class="upload-placeholder">
+              <span class="material-icons">add_a_photo</span>
+              <p>เลือกรูปภาพเกม</p>
+            </div>
+            <img
+              *ngIf="profilePreview"
+              [src]="profilePreview"
+              alt="Profile Preview"
+              class="profile-preview-image"
+            />
+            <div *ngIf="profilePreview" class="edit-badge">
+              <span class="material-icons">edit</span>
+            </div>
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              style="display: none"
+            />
+          </div>
         </div>
 
+        <!-- ชื่อเกม -->
         <div class="input-group">
-          <label for="game-name" class="visually-hidden">ชื่อเกม</label>
-          <input type="text" id="game-name" name="game-name" placeholder="ชื่อเกม" required />
+          <input type="text" [(ngModel)]="title" name="title" placeholder="ชื่อเกม" required />
         </div>
 
+        <!-- รายละเอียด -->
         <div class="input-group">
-          <label for="game-details" class="visually-hidden">รายละเอียดเกม</label>
           <textarea
-            id="game-details"
-            name="game-details"
+            [(ngModel)]="detail"
+            name="detail"
             placeholder="รายละเอียดเกม"
             rows="4"
             required
           ></textarea>
         </div>
 
+        <!-- ประเภทเกม -->
         <div class="input-group select-group">
-          <label for="game-type" class="visually-hidden">ประเภทของเกม</label>
-          <select id="game-type" name="game-type" required>
-            <option value="" disabled selected>ประเภทของเกม</option>
-            <option value="action">แอ็คชั่น</option>
-            <option value="rpg">สวมบทบาท (RPG)</option>
-            <option value="strategy">กลยุทธ์</option>
+          <select [(ngModel)]="category" name="category" required>
+            <option value="">เลือกประเภทเกม</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
           </select>
           <span class="select-arrow">&#9662;</span>
         </div>
 
-        <button type="submit" class="submit-button">เพิ่มเกม</button>
+        <!-- ราคา -->
+        <div class="input-group">
+          <input
+            type="number"
+            [(ngModel)]="price"
+            name="price"
+            placeholder="ราคา (บาท)"
+            required
+            min="0"
+          />
+        </div>
+
+        <!-- ปุ่มแก้ไขเกม -->
+        <button type="submit" class="submit-button">บันทึกการแก้ไข</button>
       </form>
     </div>
   </div>

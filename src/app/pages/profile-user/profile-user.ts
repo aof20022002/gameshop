@@ -19,7 +19,7 @@ export class ProfileUser {
   topupAmount: number | null = null;
   presetAmounts = [100, 200, 500];
   constructor(private api: Api_Service) {}
-  apiBaseUrl: string = 'https://gameshop-api-production.up.railway.app/'; 
+  apiBaseUrl: string = 'https://gameshop-api-production.up.railway.app/';
   ngOnInit() {
     const userString = localStorage.getItem('user');
     if (userString) {
@@ -29,14 +29,14 @@ export class ProfileUser {
   }
 
   get fullProfileImageUrl(): string {
-  // ตรวจสอบว่ามีข้อมูลผู้ใช้งานและ profile_image แล้ว
-  if (this.User && this.User.profile_image) {
-    // ต่อ Base URL + พาธที่ดึงจาก DB
-    return this.apiBaseUrl + this.User.profile_image;
+    // ตรวจสอบว่ามีข้อมูลผู้ใช้งานและ profile_image แล้ว
+    if (this.User && this.User.profile_image) {
+      // ต่อ Base URL + พาธที่ดึงจาก DB
+      return this.apiBaseUrl + this.User.profile_image;
+    }
+    // ถ้าไม่มีรูป หรือ User เป็น null/undefined ให้ใช้ placeholder
+    return 'https://via.placeholder.com/100';
   }
-  // ถ้าไม่มีรูป หรือ User เป็น null/undefined ให้ใช้ placeholder
-  return 'https://via.placeholder.com/100';
-}
   toggleTopupCard() {
     this.showTopupCard = !this.showTopupCard;
   }

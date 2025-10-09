@@ -21,7 +21,13 @@ export class AddGame implements OnInit {
   profilePreview: string | ArrayBuffer | null = null; // สำคัญ!
   selectedFile: File | null = null;
   errorMessage: string = '';
-  constructor(private api_Service: Api_Service) {}
+
+  title: string = '';
+  detail: string = '';
+  category: string = '';
+  price: number = 0;
+  release_date?: string;
+  constructor(private api_Service: Api_Service, public router: Router) {}
 
   async ngOnInit() {
     // ดึงข้อมูลเกมทั้งหมดก่อน
@@ -70,6 +76,33 @@ export class AddGame implements OnInit {
         console.error('Error reading file:', error); // Debug
       };
       reader.readAsDataURL(file);
+    }
+  }
+  async onSubmit() {
+    // ตรวจสอบข้อมูลก่อนส่ง
+    if (!this.title || !this.category || !this.price || !this.detail) {
+      alert('กรุณากรอกข้อมูลเกมให้ครบถ้วน');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', this.title);
+    formData.append('category', this.category);
+    formData.append('price', this.price.toString());
+    formData.append('detail', this.detail);
+
+    if (this.selectedFile) {
+      formData.append('image_url', this.selectedFile);
+    }
+
+    try {
+      const response = await this.api_Service.addgame(formData);
+      alert('เพิ่มเกมสำเร็จ');
+      this.router.navigate(['/admin']);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      alert('เกิดข้อผิดพลาดในการเพิ่มเกม');
     }
   }
 }
