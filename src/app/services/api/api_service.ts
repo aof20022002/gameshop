@@ -18,7 +18,7 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.post(url, body));
     return response;
   }
-  //รออโยอัพ
+
   public async getAllGames(options?: any) {
     const url = this.constants.API_ENDPOINT + '/Games';
     const response = await lastValueFrom(this.http.get(url));
@@ -52,7 +52,7 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.get<Game>(url));
     return response;
   }
-  //รออโยอัพ
+
   public async addgame(formData: FormData): Promise<any> {
     const url = `${this.constants.API_ENDPOINT}/Games/AddGame`;
     try {
@@ -63,7 +63,7 @@ export class Api_Service {
       throw error;
     }
   }
-  //รออโยอัพ
+
   public async updateGame(gameId: number, formData: FormData): Promise<any> {
     const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
     try {
@@ -74,7 +74,7 @@ export class Api_Service {
       throw error;
     }
   }
-  //รออโยอัพ
+
   public async deleteGame(gameId: number): Promise<any> {
     const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
     try {
