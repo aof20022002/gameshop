@@ -91,13 +91,48 @@
 <!-- ส่วนแสดง Card แก้ไข -->
 <div class="edit-card" *ngIf="showEditCard">
   <div class="edit-card-content">
-    <h3>แก้ไขโปรไฟล์</h3>
+    <div class="profile-upload-container">
+      <h3>แก้ไขโปรไฟล์</h3>
+      <div class="profile-upload" (click)="fileInput.click()">
+        <!-- แสดงข้อความเมื่อยังไม่มีรูป -->
+        <div *ngIf="!profilePreview" class="upload-placeholder">
+          <i class="fa fa-camera"></i>
+          <p>เลือกรูปภาพ</p>
+        </div>
+
+        <!-- แสดงรูปที่เลือก -->
+        <img
+          *ngIf="profilePreview"
+          [src]="profilePreview"
+          alt="Profile Preview"
+          class="profile-preview-image"
+        />
+
+        <!-- Input file ซ่อนไว้ -->
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          style="display: none"
+        />
+      </div>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
     <label>ชื่อผู้ใช้</label>
-    <input type="text" />
+    <input type="text" [(ngModel)]="fullname" />
 
     <label>อีเมล</label>
-    <input type="email" />
+    <input type="email" [(ngModel)]="email" />
 
+    <label>รหัสผ่าน</label>
+    <input type="password" [(ngModel)]="password" />
+
+    <label>ยืนยันรหัสผ่าน</label>
+    <input type="password" [(ngModel)]="confirmPassword" />
     <div class="edit-actions">
       <button class="save-btn" (click)="saveProfile()">บันทึก</button>
       <button class="cancel-btn" (click)="toggleEditCard()">ยกเลิก</button>

@@ -41,4 +41,48 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.get<User>(url));
     return response;
   }
+
+  public async ediUserByid(uid: number, formData: FormData) {
+    const url = this.constants.API_ENDPOINT + '/User/' + uid;
+    const response = await lastValueFrom(this.http.put<User>(url, formData));
+    return response;
+  }
+  public async getGameById(gameId: number) {
+    const url = this.constants.API_ENDPOINT + '/Games/' + gameId;
+    const response = await lastValueFrom(this.http.get<Game>(url));
+    return response;
+  }
+  //รออโยอัพ
+  public async addgame(formData: FormData): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/AddGame`;
+    try {
+      const response = await lastValueFrom(this.http.post(url, formData));
+      return response;
+    } catch (error) {
+      console.error('AddGame failed:', error);
+      throw error;
+    }
+  }
+  //รออโยอัพ
+  public async updateGame(gameId: number, formData: FormData): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
+    try {
+      const response = await lastValueFrom(this.http.put(url, formData));
+      return response;
+    } catch (error) {
+      console.error('Update game failed:', error);
+      throw error;
+    }
+  }
+  //รออโยอัพ
+  public async deleteGame(gameId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Games/${gameId}`;
+    try {
+      const response = await lastValueFrom(this.http.delete(url));
+      return response;
+    } catch (error) {
+      console.error('Delete game failed:', error);
+      throw error;
+    }
+  }
 }
