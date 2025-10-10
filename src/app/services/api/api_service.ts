@@ -41,6 +41,12 @@ export class Api_Service {
     return response;
   }
 
+  public async ediUserByid(uid: number, formData: FormData) {
+    const url = this.constants.API_ENDPOINT + '/User/' + uid;
+    const response = await lastValueFrom(this.http.put<User>(url, formData));
+    return response;
+  }
+  //รออโยอัพ
   public async getGameById(gameId: number) {
     const url = this.constants.API_ENDPOINT + '/Games/' + gameId;
     const response = await lastValueFrom(this.http.get<Game>(url));

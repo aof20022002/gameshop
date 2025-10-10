@@ -14,10 +14,17 @@ import { Api_Service } from '../../services/api/api_service';
 })
 export class ProfileUser {
   User: User | null = null;
+  fullname: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  errorMessage: string = '';
   showEditCard = false;
   showTopupCard = false;
   topupAmount: number | null = null;
   presetAmounts = [100, 200, 500];
+  profilePreview: string | ArrayBuffer | null = null; // สำคัญ!
+  selectedFile: File | null = null;
   constructor(private api: Api_Service) {}
   apiBaseUrl: string = 'https://gameshop-api-production.up.railway.app/';
   ngOnInit() {
@@ -59,14 +66,93 @@ export class ProfileUser {
   toggleEditCard() {
     this.showEditCard = !this.showEditCard;
   }
+  onFileSelected(event: any) {
+    console.log('Event:', event); // Debug
 
-  saveProfile() {
-    alert('บันทึกข้อมูลสำเร็จ');
-    this.toggleEditCard();
+    const file = event.target.files[0];
+    console.log('File:', file); // Debug
+
+    if (file) {
+      // ตรวจสอบประเภทไฟล์
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        this.errorMessage = 'กรุณาเลือกไฟล์รูปภาพเท่านั้น (jpg, jpeg, png, gif)';
+        return;
+      }
+
+      // ตรวจสอบขนาดไฟล์ (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        this.errorMessage = 'ขนาดไฟล์ต้องไม่เกิน 5MB';
+        return;
+      }
+
+      this.selectedFile = file;
+      this.errorMessage = '';
+
+      // อ่านไฟล์และแสดง preview
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        console.log('Image loaded:', e.target.result?.substring(0, 50)); // Debug
+        this.profilePreview = e.target.result;
+      };
+      reader.onerror = (error) => {
+        console.error('Error reading file:', error); // Debug
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  async saveProfile() {
+    if (!this.User || !this.User.uid) {
+      this.errorMessage = 'ไม่พบข้อมูลผู้ใช้';
+      return;
+    }
+    if (this.password || this.confirmPassword) {
+      if (this.password !== this.confirmPassword) {
+        this.errorMessage = 'รหัสผ่านและการยืนยันรหัสผ่านไม่ตรงกัน';
+        return;
+      }
+      if (this.password.length < 6) {
+        // ตัวอย่างการตรวจสอบความยาวรหัสผ่าน
+        this.errorMessage = 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร';
+        return;
+      }
+    }
+
+    const formData = new FormData();
+
+    formData.append('Fullname', this.fullname);
+    formData.append('Email', this.email);
+    if (this.selectedFile) {
+      formData.append('profile_image', this.selectedFile);
+    }
+    if (this.password) {
+      formData.append('Password', this.password);
+    }
+
+    try {
+      const updateUser = await this.api.ediUserByid(this.User.uid, formData);
+
+      this.User = updateUser;
+      this.fullname = updateUser.fullname;
+      this.email = updateUser.email;
+      this.User.profile_image = updateUser.profile_image;
+      alert('แก้ไขข้อมูลสำเร็จ');
+      this.toggleEditCard();
+      this.selectedFile = null;
+      this.profilePreview = null;
+      this.password = '';
+      this.confirmPassword = '';
+      this.errorMessage = '';
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
+    }
   }
   async loadDataAsync(uid: number) {
     try {
       this.User = await this.api.getUserById(uid);
+      this.fullname = this.User.fullname;
+      this.email = this.User.email;
     } catch (error) {
       console.error('Error loading user data:', error);
       // สามารถแสดง error message ให้ user ได้

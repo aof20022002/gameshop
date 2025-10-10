@@ -38,6 +38,9 @@
           </div>
         </div>
       </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
       <div class="input-group">
         <div class="input-wrapper">
           <span class="material-icons">person</span>
