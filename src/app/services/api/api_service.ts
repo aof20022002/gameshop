@@ -112,4 +112,28 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.delete(url));
     return response;
   }
+
+  public async checkout(uid: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Orders/CreateOrder`;
+    const body = { uid };
+    const response = await lastValueFrom(this.http.post(url, { uid }));
+    return response;
+  }
+
+  public async topup(uid: number, balance: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/User/topup`;
+    const body = { uid, balance };
+    const response = await lastValueFrom(this.http.post(url, body));
+    return response;
+  }
+  public async getwallet(uid: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/User/wallet/${uid}`;
+    const response = await lastValueFrom(this.http.get(url));
+    return response;
+  }
+  public async getTransactionHistory(uid: number): Promise<any[]> {
+    const url = `${this.constants.API_ENDPOINT}/Orders/getTransactionByUserId/${uid}`;
+    const response = await lastValueFrom(this.http.get<any[]>(url));
+    return response;
+  }
 }

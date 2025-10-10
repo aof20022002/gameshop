@@ -37,7 +37,7 @@
         <div class="profile-right">
           <div class="balance-section">
             <div class="balance-label">กระเป๋าตัง</div>
-            <div class="balance-amount">701.99</div>
+            <div class="balance-amount">{{ wallte }}.00</div>
           </div>
           <button class="topup-btn" (click)="toggleTopupCard()">เติมเงิน</button>
         </div>
@@ -63,25 +63,31 @@
         </div>
 
         <div class="transaction-list">
-          <div class="transaction-item">
+          <div class="transaction-item" *ngFor="let transaction of transactions">
             <div class="transaction-left">
-              <div class="transaction-title">เติมเงิน</div>
-              <div class="transaction-amount">1500.00</div>
+              <div class="transaction-title">{{ transaction.type }}</div>
+
+              <ng-container *ngIf="transaction.type === 'ซื้อเกม'">
+                <div class="transaction-details game-list-container">
+                  <ul class="purchase-items-list">
+                    <li *ngFor="let item of transaction.purchase_items" class="item-entry">
+                      <span class="game-name">{{ item.gameName }}</span>
+
+                      <span class="item-price-detail">
+                        ({{ item.gamePrice.toFixed(2) }} <span class="currency-unit">บาท</span>)
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+              <div class="transaction-amount">{{ getDisplayAmount(transaction) }}</div>
             </div>
             <div class="transaction-right">
-              <div class="transaction-date">26/09/2025 12.00</div>
+              <div class="transaction-date">{{ transaction.date | date : 'dd/MM/yyyy HH:mm' }}</div>
             </div>
           </div>
 
-          <div class="transaction-item">
-            <div class="transaction-left">
-              <div class="transaction-title">ซื้อเกม Rust</div>
-              <div class="transaction-amount">799.00</div>
-            </div>
-            <div class="transaction-right">
-              <div class="transaction-date">26/09/2025 12.30</div>
-            </div>
-          </div>
+          <div *ngIf="transactions.length === 0" class="no-transactions">ไม่พบประวัติรายการ</div>
         </div>
       </div>
     </div>

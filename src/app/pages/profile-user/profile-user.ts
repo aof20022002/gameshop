@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../model/User';
 import { Api_Service } from '../../services/api/api_service';
+import { Transaction } from '../../model/responses/Transaction_get_res';
 
 @Component({
   selector: 'app-profile-user',
@@ -21,6 +22,8 @@ export class ProfileUser {
   errorMessage: string = '';
   showEditCard = false;
   showTopupCard = false;
+  wallte: number = 0;
+  transactions: Transaction[] = [];
   topupAmount: number | null = null;
   presetAmounts = [100, 200, 500];
   profilePreview: string | ArrayBuffer | null = null; // สำคัญ!
@@ -32,6 +35,7 @@ export class ProfileUser {
     if (userString) {
       const storedUser = JSON.parse(userString) as User;
       this.loadDataAsync(storedUser.uid);
+      this.updateWalletAndTransactions(storedUser.uid);
     }
   }
 
@@ -52,12 +56,20 @@ export class ProfileUser {
     this.topupAmount = amount;
   }
 
-  confirmTopup() {
+  async confirmTopup() {
     if (!this.topupAmount || this.topupAmount <= 0) {
       alert('กรุณาใส่จำนวนเงินที่ถูกต้อง');
       return;
     }
-    alert(`เติมเงินสำเร็จ ${this.topupAmount} บาท`);
+    try {
+      await this.api.topup(this.User?.uid || 0, this.topupAmount);
+      await this.updateWalletAndTransactions(this.User?.uid || 0);
+      alert(`เติมเงินสำเร็จ ${this.topupAmount} บาท`);
+    } catch (error) {
+      console.error('Top-up failed:', error);
+      alert('เกิดข้อผิดพลาดในการเติมเงิน กรุณาลองใหม่อีกครั้ง');
+      return;
+    }
     this.toggleTopupCard();
     this.topupAmount = null;
   }
@@ -157,5 +169,22 @@ export class ProfileUser {
       console.error('Error loading user data:', error);
       // สามารถแสดง error message ให้ user ได้
     }
+  }
+
+  async updateWalletAndTransactions(uid: number) {
+    try {
+      const wallteData = await this.api.getwallet(uid);
+      this.wallte = wallteData.balance;
+      const transactionsData = await this.api.getTransactionHistory(uid);
+      this.transactions = transactionsData as Transaction[];
+    } catch (error) {
+      console.error('Error updating wallet or transactions:', error); // อาจจะแสดงข้อความแจ้งเตือนว่าโหลดข้อมูลไม่สำเร็จ
+    }
+  }
+  getDisplayAmount(transaction: Transaction): string {
+    const value = transaction.type === 'เติมเงิน' ? transaction.amount : transaction.total_price;
+
+    // Use the Thai currency format 'th-TH' for clarity, or just .toFixed(2)
+    return value ? value.toFixed(2) : '0.00';
   }
 }

@@ -67,7 +67,16 @@ export class CartGame implements OnInit {
     }
   }
 
-  checkout() {
-    alert('ระบบยังไม่เปิดให้ชำระเงินจริง');
+  async checkout() {
+    if (!this.uid) return;
+    if (this.cartItems.length === 0) {
+      alert('ตะกร้าว่างเปล่า');
+      return;
+    }
+    try {
+      await this.api_Service.checkout(this.uid);
+      alert('สั่งซื้อเรียบร้อย');
+      await this.loadCart();
+    } catch (error) {}
   }
 }

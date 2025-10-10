@@ -539,3 +539,51 @@ body {
   border: 1px solid #f5c6cb;
   font-size: 14px;
 }
+
+.transaction-details.game-list-container {
+  padding: 0 10px 0 0;
+  margin-top: 10px;
+}
+
+.list-heading {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #a0a8b9;
+  margin-bottom: 5px;
+}
+
+.purchase-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 0.95em;
+  color: #c0c8e0;
+}
+
+.game-name {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.item-price-detail {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.currency-unit {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+.no-transactions {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 30px 0;
+  font-size: 1.1em;
+}
