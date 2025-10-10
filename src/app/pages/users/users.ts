@@ -62,8 +62,34 @@ export class Users implements OnInit {
 
     this.filteredGames = baseList.filter((g) => g.title.toLowerCase().includes(keyword));
   }
-  async detailGame(id: number) {}
+  // ✅ ฟังก์ชันเพิ่มสินค้าลงตะกร้า
+  async addToCartFromList(game: Game) {
+    try {
+      // ดึง uid จาก localStorage
+      const userStr = localStorage.getItem('user');
+      if (!userStr) {
+        alert('กรุณาเข้าสู่ระบบก่อน');
+        this.router.navigate(['/login']);
+        return;
+      }
 
+      const user = JSON.parse(userStr);
+      const uid = user.uid || user.id;
+
+      // เรียก API เพิ่มลงตะกร้า
+      await this.api_Service.addToCart(uid, game.game_Id);
+
+      alert(`เพิ่ม "${game.title}" ลงตะกร้าเรียบร้อยแล้ว ✅`);
+    } catch (error: any) {
+      console.error('เพิ่มลงตะกร้าล้มเหลว:', error);
+
+      if (error.status === 400) {
+        alert('มีสินค้านี้ในตะกร้าอยู่แล้ว');
+      } else {
+        alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+      }
+    }
+  }
   goToGameDetail(id: number) {
     this.router.navigate(['/detail-game', id]);
   }

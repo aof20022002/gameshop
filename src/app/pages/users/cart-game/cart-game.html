@@ -1,65 +1,71 @@
 <app-header-user></app-header-user>
-<!DOCTYPE html>
-<html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ตะกร้าสินค้า - KAIGAME</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- Cart Container -->
-    <div class="cart-container">
-      <button class="back-btn" onclick="window.history.back()">←</button>
 
-      <!-- Cart Items -->
-      <div class="cart-items">
-        <div class="cart-item">
-          <img
-            src="https://via.placeholder.com/60x60/1a1a1a/ffffff?text=RUST"
-            alt="Rust"
-            class="item-image"
-          />
-          <div class="item-info">
-            <span class="item-name">Rust</span>
-            <span class="item-price">฿799.00</span>
-            <button class="remove-btn">ยกเลิก</button>
-          </div>
-        </div>
+<div class="cart-wrapper">
+  <div class="cart-container">
+    <button class="back-btn" routerLink="/users">←</button>
 
-        <div class="cart-item">
-          <img
-            src="https://via.placeholder.com/60x60/1a1a1a/ffffff?text=ARK"
-            alt="ARK"
-            class="item-image"
-          />
-          <div class="item-info">
-            <span class="item-name">ARK: Survival Evolved</span>
-            <span class="item-price">฿315.00</span>
-            <button class="remove-btn">ยกเลิก</button>
-          </div>
+    <!-- รายการสินค้า -->
+    <div class="cart-items" *ngIf="cartItems.length > 0; else emptyCart">
+      <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+        <img
+          [src]="item.image_url || 'https://via.placeholder.com/60x60/1a1a1a/ffffff?text=NOIMG'"
+          [alt]="item.title"
+          class="item-image"
+        />
+        <div class="item-info">
+          <span class="item-name">{{ item.title }}</span>
+          <span class="item-price">฿{{ item.price }}</span>
+          <button class="remove-btn" (click)="removeItem(item.cart_id)">
+            <span class="material-icons" style="font-size: 16px; vertical-align: middle"
+              >close</span
+            >
+            ยกเลิก
+          </button>
         </div>
       </div>
 
-      <!-- Summary Section -->
       <div class="summary-section">
-        <div class="promo-input-wrapper">
-          <label class="promo-label">โปรโมชั่น</label>
-          <input type="text" class="promo-input" placeholder="กรอกโค้ดส่วนลด" />
-        </div>
-
-        <div class="discount-section">
-          <span class="discount-label">ส่วนลด</span>
-          <span class="discount-value">100</span>
-        </div>
-
         <div class="total-section">
           <span class="total-label">ยอดรวม</span>
-          <span class="total-value">1,014.00</span>
+          <span class="total-value">฿{{ total.toFixed(2) }}</span>
         </div>
 
-        <button class="checkout-btn">ชำระเงิน</button>
+        <div class="action-buttons">
+          <button class="checkout-btn" (click)="checkout()">
+            <span class="material-icons" style="font-size: 20px; vertical-align: middle"
+              >payment</span
+            >
+            ชำระเงิน
+          </button>
+          <button class="clear-btn" (click)="clearCart()">
+            <span class="material-icons" style="font-size: 20px; vertical-align: middle"
+              >delete_sweep</span
+            >
+            ล้างตะกร้า
+          </button>
+        </div>
       </div>
     </div>
-  </body>
-</html>
+
+    <ng-template #emptyCart>
+      <div style="text-align: center; color: white; margin-top: 40px; padding: 40px">
+        <span style="font-size: 64px">🛒</span>
+        <h3 style="margin-top: 20px; font-size: 20px">ยังไม่มีสินค้าในตะกร้า</h3>
+        <button
+          routerLink="/users"
+          style="
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          "
+        >
+          เลือกซื้อเกม
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -79,4 +79,31 @@ export class Api_Service {
       throw error;
     }
   }
+
+  // ==================== Cart APIs ====================
+
+  public async addToCart(uid: number, gameId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Cart/AddToCart`;
+    const body = { uid, game_id: gameId };
+    const response = await lastValueFrom(this.http.post(url, body));
+    return response;
+  }
+
+  public async getCart(uid: number): Promise<any[]> {
+    const url = `${this.constants.API_ENDPOINT}/Cart/GetCart/${uid}`;
+    const response = await lastValueFrom(this.http.get<any[]>(url));
+    return response;
+  }
+
+  public async removeFromCart(cartId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Cart/RemoveFromCart/${cartId}`;
+    const response = await lastValueFrom(this.http.delete(url));
+    return response;
+  }
+
+  public async clearCart(uid: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Cart/ClearCart/${uid}`;
+    const response = await lastValueFrom(this.http.delete(url));
+    return response;
+  }
 }

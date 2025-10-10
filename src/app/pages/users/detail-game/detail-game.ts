@@ -15,10 +15,13 @@ import { Api_Service } from '../../../services/api/api_service';
 export class DetailGame implements OnInit {
   game: Game | null = null;
 
-  constructor(private route: ActivatedRoute, private api_Service: Api_Service) {}
+  constructor(
+    private route: ActivatedRoute,
+    private api_Service: Api_Service,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
-    // ดึง id จาก URL
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       try {
@@ -29,8 +32,32 @@ export class DetailGame implements OnInit {
     }
   }
 
-  addToCart(game: Game) {
-    let cart: Game[] = [];
-    const cartData = localStorage.getItem('cart');
+  async addToCart(game: Game) {
+    try {
+      // ดึง uid จาก localStorage
+      const userStr = localStorage.getItem('user');
+      if (!userStr) {
+        return;
+      }
+
+      const user = JSON.parse(userStr);
+      const uid = user.uid || user.id;
+
+      // เรียก API เพิ่มลงตะกร้า
+      const response = await this.api_Service.addToCart(uid, game.game_Id);
+
+      alert(`เพิ่ม "${game.title}" ลงตะกร้าเรียบร้อยแล้ว`);
+
+      // อัพเดทจำนวนในตะกร้า (ถ้ามี badge แสดงจำนวน)
+      // สามารถเพิ่ม service สำหรับ broadcast event ได้
+    } catch (error: any) {
+      console.error('เพิ่มลงตะกร้าล้มเหลว:', error);
+
+      if (error.status === 400) {
+        alert('มีสินค้านี้ในตะกร้าอยู่แล้ว');
+      } else {
+        alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+      }
+    }
   }
 }
