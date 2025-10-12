@@ -2,16 +2,17 @@ import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Admin } from './pages/admin/admin';
-
 import { Users } from './pages/users/users';
 import { ProfileUser } from './pages/profile-user/profile-user';
 import { ProfileAdmin } from './pages/profile-admin/profile-admin';
-import { A, D } from '@angular/cdk/keycodes';
+import { A, D, G } from '@angular/cdk/keycodes';
 import { AddGame } from './pages/admin/add-game/add-game';
 import { EditGame } from './pages/admin/edit-game/edit-game';
 import { CartGame } from './pages/users/cart-game/cart-game';
 import { DetailGame } from './pages/users/detail-game/detail-game';
-
+import { GameLibrary } from './pages/users/game-library/game-library';
+import { AllUser } from './pages/admin/all-user/all-user';
+import { UserHistory } from './pages/admin/user-history/user-history';
 export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'admin', component: Admin },
@@ -23,5 +24,8 @@ export const routes: Routes = [
   { path: 'edit-game/:id', component: EditGame },
   { path: 'cart-game', component: CartGame },
   { path: 'detail-game/:id', component: DetailGame },
+  { path: 'game-libary', component: GameLibrary },
+  { path: 'all-user', component: AllUser },
+  { path: 'user-history/:id', component: UserHistory },
   { path: '', component: Login },
 ];

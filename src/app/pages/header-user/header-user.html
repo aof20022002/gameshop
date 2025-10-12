@@ -7,8 +7,8 @@
     </div>
 
     <div class="nav-links">
-      <a routerLink="/store" class="nav-link">ซื้อเกม</a>
-      <a routerLink="/library" class="nav-link">คลัง</a>
+      <a routerLink="/store" (click)="gotoBuygame()" class="nav-link">ซื้อเกม</a>
+      <a routerLink="/library" (click)="gotoGameLibrary()" class="nav-link">คลัง</a>
 
       <div class="profile-icon" (click)="toggleMenu($event)">
         <svg

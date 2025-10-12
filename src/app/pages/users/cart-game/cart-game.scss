@@ -16,9 +16,9 @@ body {
 /* ✅ ครอบเนื้อหากลางหน้าจอ */
 .cart-wrapper {
   display: flex;
-  justify-content: center;   /* กึ่งกลางแนวนอน */
-  align-items: center;       /* กึ่งกลางแนวตั้ง */
-  min-height: 100vh;
+  justify-content: center; /* กึ่งกลางแนวนอน */
+  margin-top: 30px;
+  min-height: 40vh;
   padding: 20px;
 }
 
@@ -59,7 +59,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 30px;
 }
 
 /* สินค้าแต่ละชิ้น */
@@ -119,95 +118,129 @@ body {
 }
 
 /* ส่วนสรุปราคาท้ายตะกร้า */
+
 .summary-section {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-  padding: 20px;
+  padding: 15px 20px;
   display: flex;
-  align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  color: white;
 }
 
-/* ช่องใส่โค้ดโปรโมชั่น */
-.promo-input-wrapper {
-  flex: 1;
+.promo-discount-group {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+}
+.total-section-stacked {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+/* Promo Input Wrapper */
+.promo-input-wrapper {
+  display: flex;
+  flex-direction: row; /* Make label and input inline */
+  align-items: center;
+  gap: 15px; /* Space between "โปรโมชั่น" label and input box */
 }
 
 .promo-label {
-  font-size: 14px;
-  color: #d0d0d0;
+  font-size: 16px; /* Slightly larger text */
+  color: white; /* White text for main labels */
+  font-weight: normal;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .promo-input {
-  background: white;
+  background: #cccccc; /* Light gray background for input */
   border: none;
-  border-radius: 6px;
-  padding: 10px 15px;
+  border-radius: 4px; /* Slightly tighter radius */
+  padding: 8px 12px;
   font-size: 14px;
   color: #333;
+  width: 180px; /* Set a specific width for the input box */
+  text-align: left;
+  /* Use the lighter color from the image for the input */
 }
 
 .promo-input::placeholder {
-  color: #999;
+  color: #777;
 }
 
-/* ส่วนลด */
 .discount-section {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 120px;
+  align-items: flex-start;
+  gap: 15px;
 }
 
 .discount-label {
-  font-size: 14px;
-  color: #d0d0d0;
-}
-
-.discount-value {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
   color: white;
-}
 
-/* ยอดรวมทั้งหมด */
-.total-section {
+  font-weight: normal;
+  white-space: nowrap;
+}
+.left-column {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 140px;
+  gap: 15px; /* Space between promo input and total section */
+  flex: 1;
+}
+.discount-value {
+  color: white; /* White color for the value */
+  font-size: 16px;
+  margin-left: 90px;
+  font-weight: normal; /* Normal weight to match the image */
+  white-space: nowrap;
+}
+
+/* Total Section: Label and value are stacked in the image, but we need to match the **horizontal display** here for the final output */
+.total-section {
+  display: flex;
+  flex-direction: column; /* Stack label and value vertically */
+  align-items: flex-end; /* Align text to the right */
+  gap: 5px; /* Reduced gap to bring label and value closer */
+  min-width: 100px; /* Ensure enough space for the value */
 }
 
 .total-label {
-  font-size: 14px;
-  color: #d0d0d0;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
 }
 
 .total-value {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
+  padding-left: 300px;
   color: white;
 }
 
-/* ปุ่มชำระเงิน */
+/* Checkout Button: Red button on the far right */
+.action-buttons {
+  /* No need for complex styling here, just for grouping */
+}
+
 .checkout-btn {
-  background: #d32f2f;
+  background: #d32f2f; /* Red button color */
   color: white;
+  margin-top: 20px;
   border: none;
-  border-radius: 8px;
-  padding: 14px 30px;
+  border-radius: 4px; /* Tighter radius to match the image */
+  padding: 10px 20px; /* Adjusted padding to be less tall */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s;
+  min-width: 120px; /* Ensure a consistent button width */
 }
 
 .checkout-btn:hover {
   background: #b71c1c;
-  transform: translateY(-2px);
 }
 
 /* ปุ่มล้างตะกร้า */

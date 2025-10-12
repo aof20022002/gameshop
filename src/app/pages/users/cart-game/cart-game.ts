@@ -15,7 +15,6 @@ export class CartGame implements OnInit {
   cartItems: any[] = [];
   total: number = 0;
   uid: number | null = null;
-
   constructor(private api_Service: Api_Service) {}
 
   async ngOnInit() {
@@ -73,10 +72,32 @@ export class CartGame implements OnInit {
       alert('ตะกร้าว่างเปล่า');
       return;
     }
+
     try {
       await this.api_Service.checkout(this.uid);
-      alert('สั่งซื้อเรียบร้อย');
+      alert('สร้างรายการสั่งซื้อและชำระเงินสำเร็จ');
       await this.loadCart();
-    } catch (error) {}
+    } catch (error) {
+      // ใช้ 'as any' และอ้างถึงตัวแปรข้อผิดพลาดที่เก็บไว้ใน error.error
+      const apiError = error as any;
+      let errorMessage = 'เกิดข้อผิดพลาดในการสั่งซื้อ';
+
+      // 💡 1. ตรวจสอบโครงสร้าง error.error.message ก่อน
+      if (apiError.error && apiError.error.message) {
+        // ดึงข้อความภาษาไทยจาก Response Body
+        errorMessage = apiError.error.message;
+
+        // 2. Fallback: หาก Service Layer จัดการ error และโยนแค่ object ที่มี property 'message'
+      } else if (apiError.message) {
+        // นี่คือข้อความ Http failure response: 400 OK
+        errorMessage = apiError.message;
+      }
+
+      // แสดงข้อความใน Console เสมอเพื่อการตรวจสอบ (ตามที่ทำไว้เดิม)
+      console.error('Checkout failed. Final message:', errorMessage);
+      console.error('Raw Error Object:', error);
+
+      alert(errorMessage);
+    }
   }
 }

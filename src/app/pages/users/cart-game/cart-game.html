@@ -23,26 +23,27 @@
           </button>
         </div>
       </div>
-
       <div class="summary-section">
-        <div class="total-section">
-          <span class="total-label">ยอดรวม</span>
-          <span class="total-value">฿{{ total.toFixed(2) }}</span>
+        <div class="left-column">
+          <div class="promo-input-wrapper">
+            <span class="promo-label">โปรโมชั่น</span>
+            <input type="text" placeholder="กรอกรหัสส่วนลด" class="promo-input" />
+            <div class="discount-section">
+              <span class="discount-label">ส่วนลด</span>
+              <span class="discount-value">100</span>
+            </div>
+          </div>
+
+          <div class="total-section-stacked">
+            <span class="total-label">ยอดรวม</span>
+            <span class="total-value">{{ total }}.00</span>
+          </div>
         </div>
 
-        <div class="action-buttons">
-          <button class="checkout-btn" (click)="checkout()">
-            <span class="material-icons" style="font-size: 20px; vertical-align: middle"
-              >payment</span
-            >
-            ชำระเงิน
-          </button>
-          <button class="clear-btn" (click)="clearCart()">
-            <span class="material-icons" style="font-size: 20px; vertical-align: middle"
-              >delete_sweep</span
-            >
-            ล้างตะกร้า
-          </button>
+        <div class="center-column">
+          <div class="action-buttons">
+            <button class="checkout-btn" (click)="checkout()">ชำระเงิน</button>
+          </div>
         </div>
       </div>
     </div>

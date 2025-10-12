@@ -1,0 +1,28 @@
+<app-header-admin></app-header-admin>
+<div class="user-history-container">
+  <header class="card-title">
+    <h1 class="title">ประวัติผู้ใช้</h1>
+  </header>
+  <main class="card-list">
+    <div *ngFor="let user of User" class="user-card">
+      <div class="card-body">
+        <div class="user-info">
+          <img
+            [src]="user.profile_image || 'https://via.placeholder.com/100'"
+            alt="Profile Picture"
+            class="avatar-img"
+            width="100"
+            height="90"
+          />
+
+          <div class="details">
+            <div class="name">{{ user.fullname }}</div>
+            <div class="email">{{ user.email }}</div>
+          </div>
+        </div>
+
+        <button class="history-button" (click)="viewHistory(user.uid)">ประวัติ</button>
+      </div>
+    </div>
+  </main>
+</div>

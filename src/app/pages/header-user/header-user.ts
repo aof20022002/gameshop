@@ -32,4 +32,10 @@ export class HeaderUser {
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }
+  gotoGameLibrary(): void {
+    this.router.navigate(['game-libary']);
+  }
+  gotoBuygame(): void {
+    this.router.navigate(['users']);
+  }
 }

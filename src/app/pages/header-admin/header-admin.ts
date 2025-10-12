@@ -31,4 +31,7 @@ export class HeaderAdmin {
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }
+  gotoAlluser(): void {
+    this.router.navigate(['all-user']);
+  }
 }

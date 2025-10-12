@@ -1,0 +1,17 @@
+<app-header-user></app-header-user>
+<body>
+  <div class="card-container" *ngIf="gameLibrary && gameLibrary.length > 0; else noGameFound">
+    <div class="game-card" *ngFor="let game of gameLibrary">
+      <div class="card-image">
+        <img [src]="game.image_url" alt="{{ game.title }} Thumbnail" />
+      </div>
+      <div class="card-title-bar">
+        <span class="card-title">{{ game.title }}</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noGameFound>
+    <div class="no-games-message">ไม่พบเกมที่คุณซื้อ</div>
+  </ng-template>
+</body>

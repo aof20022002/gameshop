@@ -1,0 +1,52 @@
+<app-header-admin></app-header-admin>
+
+<div class="history-card">
+  <div class="history-header">
+    <button class="back-button" (click)="goBack()">
+      <span class="icon-arrow-back">&#x2190;</span>
+    </button>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    ประวัติการทำรายการ
+  </div>
+
+  <div class="transaction-list">
+    <div class="transaction-item" *ngFor="let transaction of transactions">
+      <div class="transaction-left">
+        <div class="transaction-title">{{ transaction.type }}</div>
+
+        <ng-container *ngIf="transaction.type === 'ซื้อเกม'">
+          <div class="transaction-details game-list-container">
+            <ul class="purchase-items-list">
+              <li *ngFor="let item of transaction.purchase_items" class="item-entry">
+                <span class="game-name">{{ item.gameName }}</span>
+
+                <span class="item-price-detail">
+                  ({{ item.gamePrice.toFixed(2) }} <span class="currency-unit">บาท</span>)
+                </span>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+        <div class="transaction-amount">{{ getDisplayAmount(transaction) }}</div>
+      </div>
+      <div class="transaction-right">
+        <div class="transaction-date">{{ transaction.date | date : 'dd/MM/yyyy HH:mm' }}</div>
+      </div>
+    </div>
+
+    <div *ngIf="transactions.length === 0" class="no-transactions">ไม่พบประวัติรายการ</div>
+  </div>
+</div>

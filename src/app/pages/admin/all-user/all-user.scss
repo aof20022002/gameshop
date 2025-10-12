@@ -1,0 +1,130 @@
+.user-history-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #000740;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Header Styling */
+.card-title {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #ffffff;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 15px;
+  transition: opacity 0.2s;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* User Card List */
+.card-list {
+  padding: 20px 0; /* Adjust padding for cards */
+}
+
+/* Individual User Card */
+.user-card {
+  margin-bottom: 0; /* Remove margin between cards */
+  background-color: #000740; /* Ensure card background is consistent */
+  border-bottom: 1px solid #33334d; /* Darker, subtle separator line */
+  border-radius: 0; /* No border-radius for cards */
+  transition: background-color 0.2s ease;
+}
+
+.user-card:last-child {
+  border-bottom: none; /* No border on the last card */
+}
+
+.user-card:hover {
+  background-color: #000a57; /* Slightly lighter background on hover */
+  box-shadow: none;
+  transform: none;
+}
+
+.card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px; /* Padding inside the card body */
+}
+
+/* User Info Section */
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.avatar-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: none;
+  margin-right: 15px;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-grow: 1;
+}
+
+.name {
+  font-size: 16px; /* Slightly smaller name font */
+  font-weight: 500;
+  color: #ffffff; /* White text for name */
+  margin-right: 10px; /* Space between name and email */
+  margin-bottom: 0;
+}
+
+.email {
+  font-size: 14px;
+  color: #a0a0c0; /* Lighter text for email, slightly purplish */
+  text-decoration: underline; /* Underline email */
+  text-decoration-color: #a0a0c0; /* Match underline color */
+}
+
+/* History Button */
+.history-button {
+  background-color: #e53935; /* Red color from the image */
+  color: white;
+  border: none;
+  padding: 8px 15px; /* Adjust padding for a smaller button */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none; /* No uppercase */
+  letter-spacing: normal; /* No letter spacing */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.history-button:hover {
+  background-color: #d32f2f; /* Slightly darker red on hover */
+}
+
+.history-button:active {
+  transform: scale(0.98);
+}

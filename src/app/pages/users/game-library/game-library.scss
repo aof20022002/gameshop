@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  padding: 50px 0;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.game-card {
+  width: 220px;
+  height: 300px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.card-image {
+  width: 100%;
+  height: calc(100% - 70px);
+  background-color: #000;
+  position: relative;
+}
+.no-games-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.5em;
+  color: #cccccc;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-title-bar {
+  width: 100%;
+  height: 70px;
+  background-color: #0a1128;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.card-title {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+@media (max-width: 1200px) {
+  .card-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .game-card {
+    width: 180px;
+    height: 300px;
+  }
+  .card-title-bar {
+    height: 50px;
+  }
+}

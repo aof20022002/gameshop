@@ -1,0 +1,112 @@
+.history-card {
+  width: 70%;
+  margin: 40px auto;
+  background: linear-gradient(135deg, #001440 0%, #002060 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.back-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 15px;
+  transition: opacity 0.2s;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-header svg {
+  color: #4fc3f7;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.transaction-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.transaction-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.transaction-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.transaction-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.transaction-amount {
+  color: #8899aa;
+  font-size: 0.95rem;
+}
+
+.transaction-right {
+  text-align: right;
+}
+
+.transaction-date {
+  color: #8899aa;
+  font-size: 0.9rem;
+}
+.no-transactions {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 30px 0;
+  font-size: 1.1em;
+}
+.purchase-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 0.95em;
+  color: #c0c8e0;
+}
+
+.game-name {
+  color: #ffffff;
+  font-weight: 400;
+}

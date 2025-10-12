@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Api_Service } from '../../services/api/api_service';
 import { Game } from '../../model/responses/game_get_res';
-
 @Component({
   selector: 'app-users',
   imports: [HeaderUser, FormsModule, CommonModule, RouterLink],
@@ -19,7 +18,6 @@ export class Users implements OnInit {
   selectedCategory: string = '';
   searchText: string = '';
   Game: Game | null = null;
-
   constructor(private api_Service: Api_Service, private router: Router) {}
 
   async ngOnInit() {
@@ -78,7 +76,6 @@ export class Users implements OnInit {
 
       // เรียก API เพิ่มลงตะกร้า
       await this.api_Service.addToCart(uid, game.game_Id);
-
       alert(`เพิ่ม "${game.title}" ลงตะกร้าเรียบร้อยแล้ว ✅`);
     } catch (error: any) {
       console.error('เพิ่มลงตะกร้าล้มเหลว:', error);
