@@ -119,7 +119,12 @@ export class Api_Service {
     const response = await lastValueFrom(this.http.post(url, { uid }));
     return response;
   }
-
+  public async checkoutWithCode(uid: number, couponCode: string): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Orders/CreateOrder`;
+    const body = { uid, couponCode };
+    const response = await lastValueFrom(this.http.post(url, body));
+    return response;
+  }
   public async topup(uid: number, balance: number): Promise<any> {
     const url = `${this.constants.API_ENDPOINT}/User/topup`;
     const body = { uid, balance };
@@ -149,5 +154,50 @@ export class Api_Service {
     const url = `${this.constants.API_ENDPOINT}/User`;
     const response = await lastValueFrom(this.http.get<User[]>(url));
     return response;
+  }
+  public async getAllPromotions(): Promise<any[]> {
+    const url = `${this.constants.API_ENDPOINT}/Discount/getallcoupon`;
+    const response = await lastValueFrom(this.http.get<any[]>(url));
+    return response;
+  }
+  public async createPromotion(formData: any): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Discount`;
+    try {
+      const response = await lastValueFrom(this.http.post(url, formData));
+      return response;
+    } catch (error) {
+      console.error('Create promotion failed:', error);
+      throw error;
+    }
+  }
+  public async deletePromotion(promotionId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Discount/deletecoupon/${promotionId}`;
+    try {
+      const response = await lastValueFrom(this.http.delete(url));
+      return response;
+    } catch (error) {
+      console.error('Delete promotion failed:', error);
+      throw error;
+    }
+  }
+  public async editPromotion(promotionId: number, formData: any): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Discount/updatecoupon/${promotionId}`;
+    try {
+      const response = await lastValueFrom(this.http.put(url, formData));
+      return response;
+    } catch (error) {
+      console.error('Edit promotion failed:', error);
+      throw error;
+    }
+  }
+  public async getPromotionById(promotionId: number): Promise<any> {
+    const url = `${this.constants.API_ENDPOINT}/Discount/getAllcupon?did=${promotionId}`;
+    try {
+      const response = await lastValueFrom(this.http.get(url));
+      return response;
+    } catch (error) {
+      console.error('Get promotion by ID failed:', error);
+      throw error;
+    }
   }
 }

@@ -27,10 +27,16 @@
         <div class="left-column">
           <div class="promo-input-wrapper">
             <span class="promo-label">โปรโมชั่น</span>
-            <input type="text" placeholder="กรอกรหัสส่วนลด" class="promo-input" />
+            <input
+              type="text"
+              placeholder="กรอกรหัสส่วนลด"
+              class="promo-input"
+              [(ngModel)]="Code"
+            />
+            <button class="apply-promo-btn" (click)="applyPromo()">ใช้โค้ด</button>
             <div class="discount-section">
               <span class="discount-label">ส่วนลด</span>
-              <span class="discount-value">100</span>
+              <span class="discount-value">{{ discountValue }}</span>
             </div>
           </div>
 

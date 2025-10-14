@@ -161,9 +161,9 @@ body {
 }
 
 /* Input and Textarea Styling */
-.game-form input[type="text"],
-.game-form input[type="number"],
-.game-form input[type="date"],
+.game-form input[type='text'],
+.game-form input[type='number'],
+.game-form input[type='date'],
 .game-form textarea {
   width: 100%;
   padding: 15px 20px;
@@ -189,9 +189,9 @@ body {
 }
 
 /* Date Input Styling */
-input[type="date"] {
+input[type='date'] {
   color-scheme: dark;
-  
+
   &::-webkit-calendar-picker-indicator {
     filter: invert(1);
     cursor: pointer;
@@ -311,9 +311,9 @@ input[type="date"] {
     height: 130px;
   }
 
-  .game-form input[type="text"],
-  .game-form input[type="number"],
-  .game-form input[type="date"],
+  .game-form input[type='text'],
+  .game-form input[type='number'],
+  .game-form input[type='date'],
   .game-form textarea,
   .select-group select {
     font-size: 14px;

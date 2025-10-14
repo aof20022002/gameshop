@@ -1,0 +1,77 @@
+<app-header-admin></app-header-admin>
+<div class="form-container">
+  <div class="form-card">
+    <div class="back-arrow" (click)="gotoCouponList()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </div>
+    <h2>สร้างโปรโมชั่น</h2>
+
+    <form (ngSubmit)="onSubmit()" #discountForm="ngForm">
+      <div class="form-group">
+        <label for="code">โค้ด</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          class="form-control"
+          [(ngModel)]="code"
+          requirede
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="discountType">ประเภทส่วนลด</label>
+        <select
+          id="discountType"
+          name="discountType"
+          class="form-control"
+          [(ngModel)]="discountType"
+        >
+          <option value="percent">เปอร์เซ็นต์ (Percent)</option>
+          <option value="fixed">จำนวนเต็ม (Fixed)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="discountValue">มูลค่าส่วนลด</label>
+        <input
+          type="number"
+          id="discountValue"
+          name="discountValue"
+          class="form-control"
+          [(ngModel)]="discountValue"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="usageLimit">จำกัดการใช้งาน</label>
+        <input
+          type="number"
+          id="usageLimit"
+          name="usageLimit"
+          class="form-control"
+          [(ngModel)]="usageLimit"
+          required
+        />
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="!discountForm.form.valid">
+        สร้างโค้ด
+      </button>
+    </form>
+  </div>
+</div>

@@ -183,8 +183,6 @@ export class ProfileUser {
   }
   getDisplayAmount(transaction: Transaction): string {
     const value = transaction.type === 'เติมเงิน' ? transaction.amount : transaction.total_price;
-
-    // Use the Thai currency format 'th-TH' for clarity, or just .toFixed(2)
     return value ? value.toFixed(2) : '0.00';
   }
 }

@@ -13,6 +13,9 @@ import { DetailGame } from './pages/users/detail-game/detail-game';
 import { GameLibrary } from './pages/users/game-library/game-library';
 import { AllUser } from './pages/admin/all-user/all-user';
 import { UserHistory } from './pages/admin/user-history/user-history';
+import { AddCoupon } from './pages/admin/add-coupon/add-coupon';
+import { CouponList } from './pages/admin/coupon-list/coupon-list';
+import { UpdateCoupon } from './pages/admin/update-coupon/update-coupon';
 export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'admin', component: Admin },
@@ -27,5 +30,8 @@ export const routes: Routes = [
   { path: 'game-libary', component: GameLibrary },
   { path: 'all-user', component: AllUser },
   { path: 'user-history/:id', component: UserHistory },
+  { path: 'coupon-list', component: CouponList },
+  { path: 'add-coupun', component: AddCoupon },
+  { path: 'update-coupon/:id', component: UpdateCoupon },
   { path: '', component: Login },
 ];

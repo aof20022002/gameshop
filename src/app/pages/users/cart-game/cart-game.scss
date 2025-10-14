@@ -193,11 +193,40 @@ body {
 .discount-value {
   color: white; /* White color for the value */
   font-size: 16px;
-  margin-left: 90px;
+  padding-left: 10%;
   font-weight: normal; /* Normal weight to match the image */
   white-space: nowrap;
 }
+.apply-promo-btn {
+  /* การออกแบบและสีสัน */
+  background-color: #28a745; /* สีเขียวสำหรับ "Success" */
+  color: white;
+  border: none; /* เอาเส้นขอบเดิมออก */
+  border-radius: 8px; /* ทำให้ขอบมนสวยงาม */
+  padding: 7px 10px; /* เพิ่มพื้นที่ว่างภายในปุ่ม (แนวตั้ง แนวนอน) *
 
+  /* การตอบสนอง */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  outline: none;
+}
+
+/* เมื่อผู้ใช้เอาเมาส์ไปชี้ */
+.apply-promo-btn:hover {
+  background-color: #218838; /* ทำให้สีเขียวเข้มขึ้น */
+}
+
+/* เมื่อผู้ใช้กดปุ่ม */
+.apply-promo-btn:active {
+  transform: scale(0.98); /* ทำให้ปุ่มดูเหมือนถูกกดลงไป */
+}
+
+/* เมื่อปุ่มถูกปิดการใช้งาน */
+.apply-promo-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
 /* Total Section: Label and value are stacked in the image, but we need to match the **horizontal display** here for the final output */
 .total-section {
   display: flex;

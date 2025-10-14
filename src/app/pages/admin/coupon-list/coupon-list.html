@@ -1,0 +1,34 @@
+<app-header-admin></app-header-admin>
+<div class="promotion-card">
+  <div class="card-header">
+    <h2 class="card-title">
+      <span class="back-arrow">&larr;</span>
+      โปรโมชั่น
+    </h2>
+    <button class="add-promo-button" (click)="gotoaddPromo()">เพิ่มโปรโมชั่น</button>
+  </div>
+
+  <table class="promo-table">
+    <thead>
+      <tr>
+        <th>ชื่อโปรโมชั่น</th>
+        <th>ส่วนลด</th>
+        <th>จำนวนที่ใช้ไป</th>
+        <th>จำนวนทั้งหมด</th>
+        <th>จัดการ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promo of promotions">
+        <td>{{ promo.code }}</td>
+        <td>{{ promo.discountValue }}</td>
+        <td>{{ promo.timesUsed }}</td>
+        <td>{{ promo.usageLimit }}</td>
+        <td>
+          <button class="edit-button" (click)="editPromotion(promo.did)">แก้ไข</button>
+          <button class="delete-button" (click)="deletePromotion(promo.did)">ลบ</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

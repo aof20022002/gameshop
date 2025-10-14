@@ -15,6 +15,8 @@ export class CartGame implements OnInit {
   cartItems: any[] = [];
   total: number = 0;
   uid: number | null = null;
+  Code: string = '';
+  discountValue: number = 0;
   constructor(private api_Service: Api_Service) {}
 
   async ngOnInit() {
@@ -74,8 +76,14 @@ export class CartGame implements OnInit {
     }
 
     try {
-      await this.api_Service.checkout(this.uid);
-      alert('สร้างรายการสั่งซื้อและชำระเงินสำเร็จ');
+      if (this.Code == '') {
+        await this.api_Service.checkout(this.uid);
+        alert('ชำระเงินสำเร็จ');
+      } else {
+        await this.api_Service.checkoutWithCode(this.uid, this.Code);
+        alert('ชำระเงินสำเร็จและได้รับส่วนลด');
+      }
+
       await this.loadCart();
     } catch (error) {
       // ใช้ 'as any' และอ้างถึงตัวแปรข้อผิดพลาดที่เก็บไว้ใน error.error
@@ -98,6 +106,24 @@ export class CartGame implements OnInit {
       console.error('Raw Error Object:', error);
 
       alert(errorMessage);
+    }
+  }
+  async applyPromo() {
+    if (this.Code == '') {
+      alert('กรุณากรอกรหัสส่วนลด');
+      return;
+    }
+    const foundPromo = (await this.api_Service.getAllPromotions()).find(
+      (promo) => promo.code.toLowerCase() === this.Code.toLowerCase()
+    );
+
+    if (foundPromo) {
+      this.discountValue = foundPromo.discountValue;
+      this.total = this.total - foundPromo.discountValue;
+    } else {
+      // ถ้าไม่เจอ
+      console.log('Promotion not found');
+      alert('รหัสส่วนลดไม่ถูกต้อง หรือไม่สามารถใช้งานได้');
     }
   }
 }
